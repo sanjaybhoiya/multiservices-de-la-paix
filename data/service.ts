@@ -1,150 +1,86 @@
-import {
-  ShieldCheck,
-  Car,
-  Footprints,
-  KeyRound,
-  SquarePen,
-  Watch,
-  Square,
-  Hammer,
-  type LucideIcon,
-} from "lucide-react";
-
-export type Service = {
-  slug: string;
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-  items: string[];
-
-  accessories?: {
-    title?: string;
-    items: string[];
-  };
-};
-
-export const SERVICES: Service[] = [
+export const SERVICES = [
   {
-    slug: "serrurerie",
-    icon: ShieldCheck,
-    title: "Serrurerie",
-    subtitle: "Habitation & locaux",
-    items: [
-      "Ouverture de porte (claquée, verrouillée)",
-      "Remplacement de serrure (toutes marques)",
-      "Installation de serrures de sécurité",
-      "Reproduction de clés (simples, sécurisées)",
-      "Réparation de serrures",
-      "Dépannage en urgence",
-    ],
-    accessories: {
-      title: "◆ Accessoires en boutique",
-      items: [
-        "Cylindres",
-        "Verrous",
-        "Cadenas",
-        "Poignées",
-        "Barillets",
-        "Produits d’entretien",
-      ],
-    },
+    slug: "serrurerie-depannage",
+    icon: "Wrench",
+    title: "Serrurerie dépannage",
+    description:
+      "Ouverture de porte claquée ou verrouillée, remplacement de serrure toutes marques, sécurisation après effraction et dépannage serrurier en urgence 24h/24 à Suresnes et dans les Hauts-de-Seine. Intervention rapide et travail soigné.",
   },
-
   {
     slug: "serrurerie-automobile",
-    icon: Car,
+    icon: "Car",
     title: "Serrurerie automobile",
-    subtitle: "Clés & dépannage véhicule",
-    items: [
-      "Reproduction de clés voiture",
-      "Programmation de clés électroniques",
-      "Ouverture de véhicule",
-      "Remplacement de coque / télécommande",
-      "Dépannage perte de clés",
-    ],
-    accessories: {
-      title: "◆ Accessoires en boutique",
-      items: ["Coques de clés", "Piles", "Télécommandes", "Boîtiers"],
-    },
+    description:
+      "Reproduction et programmation de clés de voiture, ouverture de véhicule, perte totale de clé et dépannage automobile toutes marques.",
   },
-
+  {
+    slug: "reproduction-cles",
+    icon: "KeyRound",
+    title: "Reproduction de clés",
+    description:
+      "Double de clés maison, appartement, boîte aux lettres, cave, portail et clés sécurisées.",
+  },
+  {
+    slug: "badges-telecommandes",
+    icon: "BadgeCheck",
+    title: "Badges & télécommandes",
+    description:
+      "Copie et programmation de badges d’immeuble et télécommandes de portail.",
+  },
+  {
+    slug: "boites-aux-lettres",
+    icon: "Mailbox",
+    title: "Boîtes aux lettres",
+    description:
+      "Ouverture, réparation et remplacement de serrures de boîtes aux lettres.",
+  },
+  {
+    slug: "rideaux-metalliques",
+    icon: "Store",
+    title: "Rideaux métalliques",
+    description:
+      "Dépannage et réparation de rideaux métalliques pour commerces.",
+  },
   {
     slug: "cordonnerie",
-    icon: Footprints,
+    icon: "Footprints",
     title: "Cordonnerie",
-    subtitle: "Chaussures & maroquinerie",
-    items: [
-      "Réparation de chaussures (semelles, talons…)",
-      "Entretien et rénovation cuir",
-      "Réparation maroquinerie (sacs, ceintures)",
-      "Remplacement fermetures éclair",
-    ],
-    accessories: {
-      title: "◆ Accessoires en boutique",
-      items: ["Lacets", "Semelles", "Produits d’entretien cuir", "Cirages"],
-    },
+    description:
+      "Réparation de chaussures, cuir, semelles et entretien complet.",
   },
-
   {
-    slug: "cles-reproduction",
-    icon: KeyRound,
-    title: "Clés & reproduction",
-    subtitle: "Tous types de clés",
-    items: [
-      "Duplication de clés tous types",
-      "Clés spéciales et techniques",
-      "Clés sécurisées",
-    ],
+    slug: "reparation-sneakers",
+    icon: "Sparkles",
+    title: "Réparation sneakers",
+    description:
+      "Nettoyage et rénovation complète de sneakers toutes marques.",
   },
-
   {
-    slug: "plaques-gravure",
-    icon: SquarePen,
-    title: "Plaques & gravure",
-    subtitle: "Sur-mesure en atelier",
-    items: [
-      "Plaques d’immatriculation (auto, moto)",
-      "Gravure de plaques (boîte aux lettres, portes…)",
-      "Tampons professionnels personnalisés",
-    ],
+    slug: "gravure-plaques",
+    icon: "Shield",
+    title: "Gravure & plaques",
+    description:
+      "Plaques professionnelles et signalétique personnalisée.",
   },
-
   {
-    slug: "multiservices",
-    icon: Watch,
-    title: "Multiservices",
-    subtitle: "Réparations rapides",
-    items: [
-      "Remplacement de piles de montres",
-      "Ajustement et remplacement de bracelets",
-      "Petites réparations du quotidien",
-    ],
+    slug: "montres-bracelets",
+    icon: "Watch",
+    title: "Montres & bracelets",
+    description:
+      "Changement de pile, bracelet et réparation de montres.",
   },
-
   {
-    slug: "vitrerie",
-    icon: Square,
-    title: "Vitrerie",
-    subtitle: "Dépannage uniquement",
-    items: [
-      "Remplacement de vitres cassées",
-      "Intervention rapide en cas de bris",
-      "Mise en sécurité",
-    ],
+    slug: "plaques-immatriculation",
+    icon: "CreditCard",
+    title: "Plaques d’immatriculation",
+    description:
+      "Fabrication et pose de plaques homologuées.",
   },
-
   {
-    slug: "depannage-urgences",
-    icon: Hammer,
-    title: "Dépannage & urgences",
-    subtitle: "Service réactif 24/7",
-    items: [
-      "Intervention rapide serrurerie",
-      "Dépannage habitation & local",
-      "Service réactif et professionnel",
-    ],
+    slug: "depannage-urgence",
+    icon: "AlertTriangle",
+    title: "Dépannage urgence 24h/24",
+    description:
+      "Intervention rapide en urgence serrurerie 24h/24.",
   },
 ];
-
-export const getServiceBySlug = (slug?: string | null) =>
-  SERVICES.find((s) => s.slug === slug);

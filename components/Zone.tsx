@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+import { siteConfig } from "@/lib/site";
 
 const villes = [
   "Suresnes", "Puteaux", "Courbevoie", "Rueil-Malmaison",
@@ -7,6 +8,9 @@ const villes = [
 ];
 
 export function Zone() {
+
+  const { address } = siteConfig.contact;
+
   return (
     <section id="zone" className="bg-cream py-24 relative overflow-hidden">
 
@@ -61,7 +65,7 @@ export function Zone() {
 
             {/* MAP */}
             <iframe
-              title="Carte Multiservices de la Paix"
+              title={`Carte ${address.city}`}
               src="https://www.openstreetmap.org/export/embed.html?bbox=2.20%2C48.84%2C2.27%2C48.88&layer=mapnik&marker=48.8714%2C2.2273"
               className="absolute inset-0 w-full h-full grayscale-65 contrast-90 scale-[1.02] group-hover:scale-[1.04] transition-transform duration-700"
               loading="lazy"
@@ -74,14 +78,14 @@ export function Zone() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-navy/95 text-navy-foreground px-4 py-2.5 text-xs tracking-[0.2em] uppercase border border-gold/40 shadow-(--shadow-card) flex items-center gap-2 backdrop-blur-md">
 
               <MapPin className="h-3.5 w-3.5 text-gold animate-pulse" />
-              37 avenue Jean Jaurès
+              {address.street}
 
             </div>
 
             {/* FOOTER */}
             <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-navy-foreground bg-navy/85 backdrop-blur px-3 py-2 rounded-sm border border-white/5">
 
-              <span>◆ Suresnes · 92150</span>
+              <span>◆ {address.city} · {address.postalCode}</span>
               <span className="text-gold">Zoom · Reset</span>
 
             </div>

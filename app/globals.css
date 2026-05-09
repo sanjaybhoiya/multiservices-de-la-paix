@@ -71,7 +71,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    
     @apply font-sans;
   }
 

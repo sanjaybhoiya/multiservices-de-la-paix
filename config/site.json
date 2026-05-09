@@ -1,0 +1,51 @@
+{
+  "name": "Multiservices de la Paix",
+
+  "legal": {
+    "director": "Elie Haddad",
+    "siret": "En cours d’immatriculation",
+    "rcs": "RCS Nanterre : En cours d’immatriculation",
+    "tva": "TVA intracommunautaire : En cours d’attribution",
+
+    "activities": [
+      "Serrurerie générale",
+      "Dépannage serrurerie",
+      "Ouverture de porte",
+      "Remplacement de serrures et cylindres",
+      "Reproduction de clés",
+      "Cordonnerie",
+      "Vitrerie",
+      "Multiservices",
+      "Petits travaux et services complémentaires"
+    ],
+
+    "insurance": "Responsabilité Civile Professionnelle : Assurance en cours de souscription",
+
+    "host": {
+      "name": "Hostinger",
+      "company": "HOSTINGER INTERNATIONAL LTD",
+      "address": "61 Lordou Vironos Street, 6023 Larnaca – Chypre"
+    }
+  },
+
+  "contact": {
+    "phone": {
+      "display": "07 49 49 03 03",
+      "raw": "+33749490303",
+      "availability": "24/7"
+    },
+    "email": "contact@multiservicesdelapaix.fr",
+    "address": {
+      "street": "37 avenue Jean Jaurès",
+      "postalCode": "92150",
+      "city": "Suresnes",
+      "country": "France",
+      "full": "37 avenue Jean Jaurès, 92150 Suresnes, France"
+    },
+    "social": {
+      "facebook": "https://www.facebook.com/share/18knZafJkf/?mibextid=wwXIfr",
+      "instagram": "https://instagram.com/yourpage",
+      "tiktok": "https://www.tiktok.com/@user2596173724926"
+    }
+  }
+}

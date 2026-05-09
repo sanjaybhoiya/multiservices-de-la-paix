@@ -1,133 +1,177 @@
 import logo from "@/assets/logo-multiservices.svg";
 import Image from "next/image";
+import Link from "next/link";
+import { siteConfig } from "@/lib/site";
+import SocialLinks from "./ui/SocialLinks";
 
 export function Footer() {
-  return (
-    <footer className="navy-section py-16">
+  const { phone, email, address, social } = siteConfig.contact;
 
-      <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-3 gap-12">
+  const companyName = "Multiservices de la Paix";
+
+  const navLinks = [
+    { href: "/", label: "Accueil" },
+    { href: "/services", label: "Services" },
+    { href: "/zone", label: "Zone d’intervention" },
+    { href: "/qui-sommes-nous", label: "Qui sommes-nous" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  const legalLinks = [
+    { href: "/mentions-legales", label: "Mentions légales" },
+    { href: "/politique-confidentialite", label: "Confidentialité" },
+    { href: "/politique-cookies", label: "Cookies" },
+    { href: "/cgv", label: "CGV" },
+    { href: "/tarifs", label: "Tarifs" },
+  ];
+
+  const linkBase =
+    "group relative inline-block text-white/60 hover:text-white transition-colors duration-300 tracking-wide";
+
+  const underline =
+    "absolute left-0 -bottom-1 h-[1px] w-0 bg-white/70 transition-all duration-500 ease-out group-hover:w-full";
+
+  return (
+    <footer className="navy-section py-20">
+
+      <div className="mx-auto max-w-7xl px-6 grid md:grid-cols-4 gap-14">
 
         {/* ================= BRAND ================= */}
         <div>
           <Image
             src={logo}
-            alt="Multiservices de la Paix"
-            className="h-24 w-auto object-contain"
+            alt={companyName}
+            className="h-20 w-auto object-contain opacity-95"
             priority
           />
 
-          <p className="mt-5 text-sm text-navy-foreground/60 max-w-sm leading-relaxed">
-            Serrurerie, cordonnerie et dépannage d’urgence. La boutique du quartier
-            à Suresnes et une intervention rapide disponible 24/7 partout en Île-de-France.
+          <p className="mt-5 text-sm font-medium text-white tracking-wide">
+            {companyName}
           </p>
 
-          <div className="mt-5 flex items-center gap-3 text-xs text-navy-foreground/60">
-            <span className="text-gold">◆ Disponible 24/7</span>
-            <span className="opacity-40">•</span>
-            <span>Intervention rapide</span>
+          <p className="mt-3 text-sm text-white/60 leading-relaxed max-w-sm">
+            Serrurerie, cordonnerie et multiservices à Suresnes et dans les Hauts-de-Seine.
+            Intervention rapide 24/7.
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 text-xs text-white/50">
+            <span className="h-1 w-1 rounded-full bg-white/40" />
+            Disponible {phone.availability}
+            <span className="h-1 w-1 rounded-full bg-white/20" />
+            Intervention rapide
           </div>
         </div>
 
-        {/* ================= SERVICES ================= */}
+        {/* ================= NAV ================= */}
         <div>
-          <h4 className="text-xs uppercase tracking-widest text-gold mb-5">
-            Services
+          <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
+            Navigation
           </h4>
 
-          <ul className="space-y-3 text-sm text-navy-foreground/70">
-
-            <li>
-              <a href="#services" className="hover:text-gold transition-colors">
-                Serrurerie
-              </a>
-            </li>
-
-            <li>
-              <a href="#services" className="hover:text-gold transition-colors">
-                Cordonnerie
-              </a>
-            </li>
-
-            <li>
-              <a href="#services" className="hover:text-gold transition-colors">
-                Dépannage d’urgence
-              </a>
-            </li>
-
-            <li>
-              <a href="#zone" className="hover:text-gold transition-colors">
-                Zone d’intervention
-              </a>
-            </li>
-
-            <li>
-              <a href="#contact" className="hover:text-gold transition-colors">
-                Contact
-              </a>
-            </li>
-
+          <ul className="space-y-4 text-sm">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className={linkBase}>
+                  {link.label}
+                  <span className={underline} />
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* ================= CONTACT ================= */}
         <div>
-          <h4 className="text-xs uppercase tracking-widest text-gold mb-5">
+          <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
             Contact
           </h4>
 
-          <ul className="space-y-3 text-sm text-navy-foreground/70">
+          <ul className="space-y-4 text-sm text-white/60">
 
             <li>
               <a
-                href="https://maps.google.com/?q=37+avenue+Jean+Jaurès+Suresnes"
+                href={`https://maps.google.com/?q=${encodeURIComponent(address.full)}`}
                 target="_blank"
-                className="hover:text-gold transition-colors"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-300"
               >
-                37 avenue Jean Jaurès
+                {address.street}
               </a>
             </li>
 
-            <li>92150 Suresnes</li>
-
-            <li>
-              <a
-                href="tel:+33749491818"
-                className="text-gold font-medium hover:opacity-80 transition"
-              >
-                07 49 49 18 18
-              </a>
+            <li className="text-white/50">
+              {address.postalCode} {address.city}
             </li>
 
             <li>
               <a
-                href="mailto:contact@multiservicesdelapaix.fr"
-                className="hover:text-gold transition-colors"
+                href={`tel:${phone.raw}`}
+                className="hover:text-white transition-colors duration-300"
               >
-                contact@multiservicesdelapaix.fr
+                {phone.display}
               </a>
             </li>
 
-            <li className="text-xs text-navy-foreground/50 pt-2">
+            <li>
+              <a
+                href={`mailto:${email}`}
+                className="hover:text-white transition-colors duration-300"
+              >
+                {email}
+              </a>
+            </li>
+
+            <li className="pt-6 mt-6 border-t border-white/10 text-xs text-white/40">
               Lun–Sam · 9h–19h · Dim fermé · Dépannage 24/7
             </li>
 
           </ul>
         </div>
 
+        {/* ================= LEGAL ================= */}
+        <div>
+          <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
+            Légal
+          </h4>
+
+          <ul className="space-y-4 text-sm">
+            {legalLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className={linkBase}>
+                  {link.label}
+                  <span className={underline} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </div>
 
       {/* ================= BOTTOM ================= */}
-      <div className="mt-14 pt-6 border-t border-white/10">
+      <div className="mt-16 pt-6 border-t border-white/10">
 
-        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-navy-foreground/50">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-white/40">
 
-          <span>
-            © {new Date().getFullYear()} Multiservices de la Paix · Suresnes
+          <span className="tracking-wide">
+            © 2026 {companyName} · {address.city}
           </span>
 
-          <span className="text-gold">
-            ◆ Serrurerie · Cordonnerie · Dépannage 24/7
-          </span>
+          <a
+            href="https://slimidigitallabs.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-3 text-[11px] text-white/30 hover:text-white/70 transition-colors duration-500"
+          >
+            <span className="h-px w-6 bg-white/20 group-hover:text-gold transition-all duration-500" />
+<span> Crafted by </span>
+            <span className="tracking-[0.35em] relative">
+              SLIMI
+              <span className="absolute left-0 -bottom-1 h-px w-0 bg-white/60 group-hover:w-full transition-all duration-500" />
+            </span>
+
+            <span className="opacity-60">Digital Labs</span>
+          </a>
 
         </div>
 

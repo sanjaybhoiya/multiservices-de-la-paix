@@ -1,4 +1,4 @@
-import { Accessoires } from "@/components/Accessoires";
+
 import { Atelier } from "@/components/Atelier";
 import { Contact } from "@/components/Contact";
 import Hero from "@/components/Hero";
@@ -13,7 +13,6 @@ export default function Home() {
       <Hero />
       <Services />
       <Urgence />
-      <Accessoires />
       <Atelier/>
       <Zone />
       <Contact />

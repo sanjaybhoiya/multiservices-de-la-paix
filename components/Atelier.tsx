@@ -34,7 +34,7 @@ export function Atelier() {
 
             {[
               ["4", "métiers", "Sous un même toit"],
-              ["24/7", "", "Dépannage d'urgence"],
+              ["24/24", "", "Dépannage d'urgence"],
               ["IDF", "", "Zone d'intervention"],
               ["1", "équipe", "Dédiée à vos projets"],
             ].map(([n, sub, desc]) => (

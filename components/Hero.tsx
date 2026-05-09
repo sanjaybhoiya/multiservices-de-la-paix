@@ -1,17 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import storefront from "@/assets/storefront.jpg";
-import { ShieldCheck, Clock, Truck, Store } from "lucide-react";
+import storefront from "@/assets/storefront.webp";
+import { ShieldCheck, Clock, Truck, Store, MessageCircle } from "lucide-react";
+import { siteConfig } from "@/lib/site";
 
 const trustItems = [
-  { icon: ShieldCheck, label: "Artisans de confiance" },
-  { icon: Clock, label: "Intervention 24/7" },
-  { icon: Truck, label: "Déplacement rapide Île-de-France" },
-  { icon: Store, label: "Boutique à Suresnes" },
+  { icon: ShieldCheck, label: "Artisan local à Suresnes" },
+  { icon: Clock, label: "Intervention 20–30 min" },
+  { icon: Truck, label: "Déplacement rapide IDF" },
+  { icon: Store, label: "Devis avant intervention" },
 ];
 
 export default function Hero() {
+  const { phone, address } = siteConfig.contact;
+
   return (
     <section
       id="accueil"
@@ -25,57 +28,77 @@ export default function Hero() {
           {/* ================= LEFT ================= */}
           <div className="lg:col-span-7">
 
-            {/* KEEP SAME */}
-            <span className="eyebrow inline-flex items-center gap-2 border border-gold/30 px-4 py-1.5 rounded-full text-navy-foreground/80 animate-pulse">
-              ◆ Suresnes · Île-de-France
-            </span>
-
-            {/* ✅ UPDATED TITLE (EXACT REQUESTED CONTENT STRUCTURE) */}
-            <h1 className="display mt-6 text-5xl md:text-6xl lg:text-7xl font-bold text-navy-foreground leading-[1.05]">
-              Votre spécialiste<br />
-              multi-services<br />
-              <span className="italic text-gold underline-gold">
-                à votre service.
+            {/* SEO LOCATION BADGE */}
+            {/* <span className="eyebrow inline-flex items-center gap-2 border border-gold/30 px-4 py-1.5 rounded-full text-navy-foreground/80 animate-pulse">
+              ◆ Serrurier Suresnes · Île-de-France
+            </span> */}
+<div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl animate-pulse">
+              <span className="h-2 w-2 rounded-full bg-[#d4af37] animate-pulse" />
+              <span className="text-[11px] uppercase tracking-[0.25em] text-white/75">
+                Serrurier Suresnes · Île-de-France
               </span>
+            </div>
+
+           {/* H1 (PREMIUM + NOT OVERLOADED) */}
+            <h1 className="display mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-navy-foreground leading-[1.05]">
+              Serrurier à{" "}
+              <span className="text-gold">Suresnes</span> Intervention{" "}
+              <span className="text-gold">24h/24</span>, 7j/7
             </h1>
 
-            {/* ✅ UPDATED SUBTITLE (MATCHING YOUR REFERENCE TEXT) */}
+            {/* H2 (LIGHT URGENCY) */}
+            <h2 className="mt-4 text-xl md:text-2xl text-navy-foreground/80 font-medium">
+              Porte claquée, serrure bloquée ou clé cassée ? Intervention en 20–30 min.
+            </h2>
+
+           {/* PARAGRAPH (SHORTENED BUT SEO SAFE) */}
             <p className="mt-6 max-w-xl text-navy-foreground/70 leading-relaxed">
-              Serrurerie, cordonnerie et dépannage d’urgence. Une boutique de quartier au
-              37 avenue Jean Jaurès, et une équipe qui se déplace 24/7 partout en Île-de-France
-              quand vous en avez besoin.
+              Artisan installé à <strong>{address.street}, {address.city}</strong>, nous intervenons en urgence pour l’ouverture de porte,
+              le dépannage serrurerie, la reproduction de clés et la cordonnerie. Devis clair avant intervention.
             </p>
 
-            {/* KEEP SAME */}
+            {/* ================= CTA ================= */}
             <div className="mt-8 flex flex-wrap items-center gap-5">
-              <a href="tel:+33749491818" className="btn-gold rounded-sm">
+
+              {/* CALL */}
+              <a
+                href={`tel:${phone.raw}`}
+                className="btn-gold rounded-sm"
+              >
                 Appeler maintenant
               </a>
 
+              {/* WHATSAPP */}
               <a
-                href="#services"
+                href="https://wa.me/33749490303?text=Bonjour%2C%20j’ai%20besoin%20d’un%20d%C3%A9pannage"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-ghost-gold inline-flex items-center gap-2 group"
               >
-                Découvrir nos services
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
                 <span className="transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
               </a>
+
             </div>
 
-            {/* ================= STATS (CONTENT ONLY UPDATED) ================= */}
+            {/* ================= STATS (SEO + TRUST ALIGNMENT) ================= */}
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-lg">
 
               <div>
-                <div className="font-serif text-3xl text-gold font-bold">24/7</div>
+                <div className="font-serif text-3xl text-gold font-bold">
+                  24/7
+                </div>
                 <div className="text-xs text-navy-foreground/60 mt-1 leading-relaxed">
-                  Dépannage<br />jour & nuit
+                  Dépannage d'urgence,<br />jour & nuit
                 </div>
               </div>
 
               <div>
                 <div className="font-serif text-2xl text-gold font-bold">
-                  Île-de<br />France
+                  92 + IDF
                 </div>
                 <div className="text-xs text-navy-foreground/60 mt-1 leading-relaxed">
                   Intervention<br />rapide
@@ -83,9 +106,9 @@ export default function Hero() {
               </div>
 
               <div>
-                <div className="font-serif text-3xl text-gold">8</div>
+                <div className="font-serif text-3xl text-gold">5+</div>
                 <div className="text-xs text-navy-foreground/60 mt-1 leading-relaxed">
-                  Métiers<br />réunis
+                  Services<br />pro
                 </div>
               </div>
 
@@ -93,7 +116,7 @@ export default function Hero() {
 
           </div>
 
-          {/* ================= RIGHT IMAGE (UNCHANGED) ================= */}
+          {/* ================= RIGHT IMAGE ================= */}
           <div className="lg:col-span-5">
 
             <div className="relative group">
@@ -103,14 +126,14 @@ export default function Hero() {
               <div className="img-zoom relative overflow-hidden rounded-sm shadow-2xl">
                 <Image
                   src={storefront}
-                  alt="Boutique Multiservices de la Paix"
+                  alt="Serrurier Multiservices de la Paix à Suresnes"
                   priority
                   className="ken-burns w-full h-auto"
                 />
               </div>
 
               <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-navy text-navy-foreground text-[10px] tracking-[0.25em] uppercase px-4 py-2 border border-gold/30 float-y">
-                37 avenue Jean Jaurès · Suresnes
+                {address.street} · {address.city}
               </div>
 
             </div>
@@ -119,16 +142,13 @@ export default function Hero() {
 
         </div>
 
-        {/* ================= TRUST BAR (UNCHANGED) ================= */}
+        {/* ================= TRUST BAR ================= */}
         <div className="mt-14 pt-2 border-t border-white/10">
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 text-[11px] uppercase tracking-[0.16em] text-navy-foreground/70">
 
             {trustItems.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center gap-3 group"
-              >
+              <div key={label} className="flex items-center gap-3 group">
                 <Icon className="h-4 w-4 text-accent transition-transform duration-300 group-hover:rotate-12 group-hover:scale-125" />
                 <span className="group-hover:text-gold transition-colors duration-300">
                   {label}
