@@ -70,7 +70,7 @@ export default function Hero() {
 
               {/* WHATSAPP */}
               <a
-                href="https://wa.me/33749490303?text=Bonjour%2C%20j’ai%20besoin%20d’un%20d%C3%A9pannage"
+                href={siteConfig.contact.phone.whatsappMessage}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-ghost-gold inline-flex items-center gap-2 group"

@@ -32,9 +32,12 @@
     "phone": {
       "display": "07 49 49 03 03",
       "raw": "+33749490303",
-      "availability": "24/7"
+      "availability": "24/7",
+      "whatsappMessage": "https://wa.me/33749490303?text=Bonjour%2C%20j’ai%20besoin%20d’un%20d%C3%A9pannage"
     },
+
     "email": "contact@multiservicesdelapaix.fr",
+
     "address": {
       "street": "37 avenue Jean Jaurès",
       "postalCode": "92150",
@@ -42,6 +45,7 @@
       "country": "France",
       "full": "37 avenue Jean Jaurès, 92150 Suresnes, France"
     },
+
     "social": {
       "facebook": "https://www.facebook.com/share/18knZafJkf/?mibextid=wwXIfr",
       "instagram": "https://instagram.com/yourpage",

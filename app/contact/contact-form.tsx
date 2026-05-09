@@ -63,6 +63,8 @@ export default function ContactForm() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const [lastSubmit, setLastSubmit] = useState(0);
+
   const [form, setForm] = useState({
     nom: "",
     prenom: "",
@@ -71,6 +73,7 @@ export default function ContactForm() {
     type: "Dépannage d'urgence",
     message: "",
     consent: false,
+    website: "",
   });
 
   useEffect(() => setMounted(true), []);
@@ -82,19 +85,63 @@ export default function ContactForm() {
   const validate = () => {
     const e: Record<string, string> = {};
 
-    if (!form.nom) e.nom = "Requis";
-    if (!form.prenom) e.prenom = "Requis";
-    if (!form.email.includes("@")) e.email = "Email invalide";
-    if (form.telephone.length < 8) e.telephone = "Invalide";
-    if (form.message.length < 10) e.message = "Trop court";
-    if (!form.consent) e.consent = "Obligatoire";
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const frenchPhoneRegex =
+      /^(?:(?:\+33|0)[1-9])(?:[\s.-]?\d{2}){4}$/;
+
+    const suspiciousPatterns = [
+      "http://",
+      "https://",
+      "viagra",
+      "crypto",
+      "bitcoin",
+    ];
+
+    if (!form.nom.trim()) e.nom = "Requis";
+
+    if (!form.prenom.trim()) e.prenom = "Requis";
+
+    if (!emailRegex.test(form.email))
+      e.email = "Email invalide";
+
+    if (!frenchPhoneRegex.test(form.telephone))
+      e.telephone = "Numéro français invalide";
+
+    if (form.message.trim().length < 10)
+      e.message = "Trop court";
+
+    if (
+      suspiciousPatterns.some((p) =>
+        form.message.toLowerCase().includes(p)
+      )
+    ) {
+      e.message = "Message invalide";
+    }
+
+    if (!form.consent)
+      e.consent = "Obligatoire";
 
     setErrors(e);
+
     return Object.keys(e).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const now = Date.now();
+
+    if (now - lastSubmit < 15000) {
+      toast.error("Veuillez patienter quelques secondes");
+      return;
+    }
+
+    if (form.website) {
+      toast.error("Spam détecté");
+      return;
+    }
 
     if (!validate()) {
       toast.error("Corrigez le formulaire");
@@ -123,7 +170,10 @@ export default function ContactForm() {
         throw new Error(data?.message || "Request failed");
       }
 
+      setLastSubmit(Date.now());
+
       setStatus("success");
+
       toast.success("Message envoyé");
 
       setTimeout(() => {
@@ -135,12 +185,16 @@ export default function ContactForm() {
           type: "Dépannage d'urgence",
           message: "",
           consent: false,
+          website: "",
         });
+
         setStatus("idle");
       }, 3000);
     } catch (err) {
       console.error(err);
+
       setStatus("error");
+
       toast.error("Erreur serveur");
 
       setTimeout(() => setStatus("idle"), 3000);
@@ -151,7 +205,6 @@ export default function ContactForm() {
 
   return (
     <>
-      {/* ✅ FIXED TOAST LAYER */}
       <Toaster
         position="top-right"
         richColors
@@ -178,9 +231,11 @@ export default function ContactForm() {
               animate={{ opacity: 1 }}
             >
               <CheckCircle2 className="h-14 w-14 text-[#d4af37]" />
+
               <h3 className="mt-4 text-2xl font-semibold">
                 Message envoyé
               </h3>
+
               <p className="text-sm text-[#1c2430]/60 mt-2">
                 Nous vous répondrons rapidement
               </p>
@@ -199,6 +254,7 @@ export default function ContactForm() {
                   error={errors.nom}
                   onChange={(v) => update("nom", v)}
                 />
+
                 <Field
                   label="Prénom"
                   placeholder="Prénom"
@@ -216,6 +272,7 @@ export default function ContactForm() {
                   error={errors.email}
                   onChange={(v) => update("email", v)}
                 />
+
                 <Field
                   label="Téléphone"
                   placeholder="06..."
@@ -252,12 +309,23 @@ export default function ContactForm() {
                 onChange={(v) => update("message", v)}
               />
 
+              {/* Honeypot anti-spam */}
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                value={form.website}
+                onChange={(e) => update("website", e.target.value)}
+              />
+
               <label className="flex gap-3 text-xs text-[#1c2430]/60">
                 <input
                   type="checkbox"
                   checked={form.consent}
                   onChange={(e) => update("consent", e.target.checked)}
                 />
+
                 J'accepte la politique de confidentialité
               </label>
 
@@ -271,6 +339,7 @@ export default function ContactForm() {
                 ) : (
                   <Send className="h-4 w-4" />
                 )}
+
                 Envoyer
               </button>
             </motion.form>

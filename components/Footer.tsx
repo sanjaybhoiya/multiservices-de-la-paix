@@ -144,6 +144,21 @@ export function Footer() {
               </li>
             ))}
           </ul>
+          
+         
+         
+        
+                  <div className="pt-4 mt-4 border-t border-white/10">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-5">
+              Réseaux sociaux
+            </p>
+
+            <SocialLinks
+              social={social}
+              variant="footer"
+            />
+          </div>
+
         </div>
 
       </div>
@@ -164,7 +179,7 @@ export function Footer() {
             className="group flex items-center gap-3 text-[11px] text-white/30 hover:text-white/70 transition-colors duration-500"
           >
             <span className="h-px w-6 bg-white/20 group-hover:text-gold transition-all duration-500" />
-<span> Crafted by </span>
+<span className="opacity-60"> Conçu par </span>
             <span className="tracking-[0.35em] relative">
               SLIMI
               <span className="absolute left-0 -bottom-1 h-px w-0 bg-white/60 group-hover:w-full transition-all duration-500" />

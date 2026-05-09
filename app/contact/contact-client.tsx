@@ -56,7 +56,7 @@ export default function ContactClient() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl">
+            <div className="inline-flex items-center gap-2 animate-pulse rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl">
               <span className="h-2 w-2 rounded-full bg-[#d4af37] animate-pulse" />
               <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-white/75">
                 Contact & Assistance
