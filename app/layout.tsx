@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // ─────────────────────────────────────────────────────────────────────────────
 // FONTS
@@ -512,7 +513,7 @@ export default function RootLayout({
 
         <CookieBanner />
         <WhatsAppButton />
-
+      <SpeedInsights/>
        <Analytics/>
       </body>
     </html>
