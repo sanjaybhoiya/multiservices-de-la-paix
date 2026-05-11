@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { db } from "@/lib/db";
+import { getDb } from "@/lib/db";
+
+export const runtime = "nodejs";
 
 /* =========================
    BASIC SANITIZER
@@ -30,7 +32,7 @@ export async function POST(req: Request) {
     const forwardEmail = process.env.FORWARD_EMAIL;
 
     if (!resendApiKey || !contactEmail) {
-      console.error("❌ Missing required environment variables");
+      console.error("❌ Missing required env variables");
       return NextResponse.json(
         { success: false, message: "Server not configured" },
         { status: 500 }
@@ -39,6 +41,9 @@ export async function POST(req: Request) {
 
     const resend = new Resend(resendApiKey);
 
+    /* =========================
+       REQUEST BODY
+       ========================= */
     const body = await req.json();
 
     const nom = safe(body.nom);
@@ -65,16 +70,18 @@ export async function POST(req: Request) {
     }
 
     /* =========================
-       SAVE TO DATABASE
+       DB (SAFE LAZY LOAD)
        ========================= */
     try {
+      const db = await getDb();
+
       await db.execute(
         `INSERT INTO leads (nom, email, telephone, service, message)
          VALUES (?, ?, ?, ?, ?)`,
         [nom, email, telephone, service, message]
       );
 
-      console.log("💾 Lead saved to database");
+      console.log("💾 Lead saved");
     } catch (dbErr) {
       console.error("❌ DB ERROR:", dbErr);
     }
@@ -99,28 +106,24 @@ export async function POST(req: Request) {
     /* =========================
        MAIN EMAIL
        ========================= */
-    const mainEmail = await resend.emails.send({
+    await resend.emails.send({
       from: "Multi Services <contact@multiservicesdelapaix.fr>",
       to: contactEmail,
       subject: `Nouveau contact - ${service}`,
       html: emailHtml,
     });
 
-    console.log("✅ Main email sent:", mainEmail);
-
     /* =========================
        ADMIN COPY
        ========================= */
     if (forwardEmail) {
       try {
-        const adminEmail = await resend.emails.send({
+        await resend.emails.send({
           from: "Multi Services <contact@multiservicesdelapaix.fr>",
           to: forwardEmail,
           subject: `📌 COPY - ${service}`,
           html: emailHtml,
         });
-
-        console.log("📌 Admin copy sent:", adminEmail);
       } catch (err) {
         console.error("⚠️ Admin copy failed:", err);
       }
@@ -130,7 +133,7 @@ export async function POST(req: Request) {
        AUTO REPLY
        ========================= */
     try {
-      const autoReply = await resend.emails.send({
+      await resend.emails.send({
         from: "Multi Services <contact@multiservicesdelapaix.fr>",
         to: email,
         subject: `Nous avons bien reçu votre demande - ${service}`,
@@ -143,14 +146,12 @@ export async function POST(req: Request) {
           <p>— Multi Services de la Paix</p>
         `,
       });
-
-      console.log("📨 Auto-reply sent:", autoReply);
     } catch (err) {
       console.error("⚠️ Auto-reply failed:", err);
     }
 
     /* =========================
-       SUCCESS RESPONSE
+       RESPONSE
        ========================= */
     return NextResponse.json({
       success: true,
@@ -158,11 +159,7 @@ export async function POST(req: Request) {
     });
 
   } catch (err: any) {
-    console.error("🔥 API ERROR FULL:", {
-      message: err?.message,
-      stack: err?.stack,
-      raw: err,
-    });
+    console.error("🔥 API ERROR:", err);
 
     return NextResponse.json(
       {
