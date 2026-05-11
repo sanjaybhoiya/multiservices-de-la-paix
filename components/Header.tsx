@@ -130,19 +130,26 @@ export function Header() {
             <span className="sm:hidden">Appeler</span>
           </a>
 
-          {/* MOBILE MENU */}
+          {/* MOBILE MENU (FIXED ACCESSIBILITY) */}
           <button
             onClick={() => setOpen(!open)}
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
             className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-sm border border-white/15 text-white hover:text-accent hover:border-accent transition"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+
         </div>
       </div>
 
       {/* ================= MOBILE MENU ================= */}
       {open && (
-        <div className="md:hidden border-t border-white/10 bg-black/40 animate-menu-in">
+        <div
+          id="mobile-menu"
+          className="md:hidden border-t border-white/10 bg-black/40 animate-menu-in"
+        >
           <div className="flex flex-col px-6 py-4 text-sm">
 
             {navLinks.map((l) => (

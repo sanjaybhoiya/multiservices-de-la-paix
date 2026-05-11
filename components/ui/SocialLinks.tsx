@@ -47,6 +47,7 @@ export default function SocialLinks({
         href={social.instagram}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Instagram"
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.95 }}
         className={`${baseIcon} ${
@@ -63,6 +64,7 @@ export default function SocialLinks({
         href={social.tiktok}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="TikTok"
         whileHover={{ scale: 1.15 }}
         whileTap={{ scale: 0.95 }}
         className={`${baseIcon} ${

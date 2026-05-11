@@ -65,9 +65,9 @@ export function Footer() {
 
         {/* ================= NAV ================= */}
         <div>
-          <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
+          <h2 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
             Navigation
-          </h4>
+          </h2>
 
           <ul className="space-y-4 text-sm">
             {navLinks.map((link) => (
@@ -83,9 +83,9 @@ export function Footer() {
 
         {/* ================= CONTACT ================= */}
         <div>
-          <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
+          <h2 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
             Contact
-          </h4>
+          </h2>
 
           <ul className="space-y-4 text-sm text-white/60">
 
@@ -131,9 +131,9 @@ export function Footer() {
 
         {/* ================= LEGAL ================= */}
         <div>
-          <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
+          <h2 className="text-[11px] uppercase tracking-[0.25em] text-white/40 mb-6">
             Légal
-          </h4>
+          </h2>
 
           <ul className="space-y-4 text-sm ">
             {legalLinks.map((link) => (
