@@ -32,14 +32,14 @@ export default function Hero() {
             {/* <span className="eyebrow inline-flex items-center gap-2 border border-gold/30 px-4 py-1.5 rounded-full text-navy-foreground/80 animate-pulse">
               ◆ Serrurier Suresnes · Île-de-France
             </span> */}
-<div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl animate-pulse">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl animate-pulse">
               <span className="h-2 w-2 rounded-full bg-[#d4af37] animate-pulse" />
               <span className="text-[11px] uppercase tracking-[0.25em] text-white/75">
                 Serrurier Suresnes · Île-de-France
               </span>
             </div>
 
-           {/* H1 (PREMIUM + NOT OVERLOADED) */}
+            {/* H1 (PREMIUM + NOT OVERLOADED) */}
             <h1 className="display mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-navy-foreground leading-[1.05]">
               Serrurier à{" "}
               <span className="text-gold">Suresnes</span> Intervention{" "}
@@ -51,7 +51,7 @@ export default function Hero() {
               Porte claquée, serrure bloquée ou clé cassée ? Intervention en 20–30 min.
             </h2>
 
-           {/* PARAGRAPH (SHORTENED BUT SEO SAFE) */}
+            {/* PARAGRAPH (SHORTENED BUT SEO SAFE) */}
             <p className="mt-6 max-w-xl text-navy-foreground/70 leading-relaxed">
               Artisan installé à <strong>{address.street}, {address.city}</strong>, nous intervenons en urgence pour l’ouverture de porte,
               le dépannage serrurerie, la reproduction de clés et la cordonnerie. Devis clair avant intervention.
@@ -127,6 +127,9 @@ export default function Hero() {
                 <Image
                   src={storefront}
                   alt="Serrurier Multiservices de la Paix à Suresnes"
+                  width={1200}
+                  height={896}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
                   priority
                   className="ken-burns w-full h-auto"
                 />

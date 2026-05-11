@@ -70,7 +70,7 @@ export function Atelier() {
               alt="Atelier de serrurerie et cordonnerie"
               width={1024}
               height={1024}
-              priority
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
               className="w-full h-auto rounded-sm shadow-(--shadow-card) transition-transform duration-700 group-hover:scale-[1.03]"
             />
           </div>
