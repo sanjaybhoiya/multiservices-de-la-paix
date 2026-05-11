@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import SocialLinks from "./ui/SocialLinks";
+import AgencySignature from "./AgencySignature";
 
 export function Footer() {
   const { phone, email, address, social } = siteConfig.contact;
@@ -134,7 +135,7 @@ export function Footer() {
             Légal
           </h4>
 
-          <ul className="space-y-4 text-sm">
+          <ul className="space-y-4 text-sm ">
             {legalLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkBase}>
@@ -172,21 +173,7 @@ export function Footer() {
             © 2026 {companyName} · {address.city}
           </span>
 
-          <a
-            href="https://slimidigitallabs.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 text-[11px] text-white/30 hover:text-white/70 transition-colors duration-500"
-          >
-            <span className="h-px w-6 bg-white/20 group-hover:text-gold transition-all duration-500" />
-<span className="opacity-60"> Conçu par </span>
-            <span className="tracking-[0.35em] relative">
-              SLIMI
-              <span className="absolute left-0 -bottom-1 h-px w-0 bg-white/60 group-hover:w-full transition-all duration-500" />
-            </span>
-
-            <span className="opacity-60">Digital Labs</span>
-          </a>
+          <AgencySignature />
 
         </div>
 

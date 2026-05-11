@@ -11,12 +11,12 @@ export default function AboutClient() {
   const { contact } = siteConfig;
 
   return (
-    // FIX 1: Wrap in main with the page background color to eliminate gaps
-    <main className=" bg-[#f5f0e6]">
+    <main className="bg-[#f5f0e6]">
       
       {/* ================= HERO ================= */}
       <section className="navy-section relative overflow-hidden py-20 sm:py-24 lg:py-32">
-        {/* BACKGROUND GLOW - Optimized blur for production */}
+        
+        {/* BACKGROUND GLOW */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-[-10%] top-[-10%] h-96 w-96 rounded-full bg-[#d4af37]/10 blur-[120px]" />
           <div className="absolute right-[-5%] bottom-[-10%] h-96 w-96 rounded-full bg-white/5 blur-[120px]" />
@@ -29,7 +29,7 @@ export default function AboutClient() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl"
           >
-            {/* BADGE - Fixed typo in class name */}
+            {/* BADGE */}
             <div className="inline-flex items-center gap-2 rounded-full border animate-pulse border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl">
               <span className="h-2 w-2 rounded-full bg-[#d4af37] animate-pulse" />
               <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-white/75">
@@ -39,7 +39,7 @@ export default function AboutClient() {
 
             <h1 className="mt-7 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-7xl">
               Multiservices de la Paix
-              <span className="mt-3 block italic text-[#d4af37]">
+              <span className="mt-3 block italic text-gold">
                 serrurier & multiservices à Suresnes
               </span>
             </h1>
@@ -52,7 +52,7 @@ export default function AboutClient() {
             <div className="mt-8">
               <a
                 href={`tel:${contact.phone.raw}`}
-                className="btn-gold inline-flex items-center gap-2 rounded-xl px-6 py-4 font-semibold shadow-xl transition-transform hover:scale-105"
+                className="btn-gold inline-flex items-center gap-2 rounded font-semibold shadow-xl transition-transform hover:scale-105"
               >
                 <Phone className="h-4 w-4" />
                 {contact.phone.display}
@@ -63,7 +63,6 @@ export default function AboutClient() {
       </section>
 
       {/* ================= CONTENT ================= */}
-      {/* FIX 2: Removed overflow-hidden to ensure smooth scrolling/sticky flow */}
       <section className="relative py-16 sm:py-24 lg:py-28 text-[#1c2430]">
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
@@ -76,6 +75,7 @@ export default function AboutClient() {
               className="lg:col-span-7"
             >
               <div className="rounded-[2.5rem] border border-white/60 bg-white/80 p-8 shadow-2xl shadow-black/5 backdrop-blur-2xl sm:p-10 lg:p-14">
+                
                 <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#d4af37]">
                   ◆ Artisan serrurier certifié FMSD
                 </p>
@@ -86,9 +86,64 @@ export default function AboutClient() {
 
                 <div className="mt-8 space-y-6 text-base leading-relaxed text-[#1c2430]/80">
                   <p>
-                    Bienvenue chez <strong>Multiservices de la Paix</strong>, votre artisan serrurier à Suresnes...
+                    Bienvenue chez <strong>Multiservices de la Paix</strong>, votre spécialiste en serrurerie, cordonnerie et multiservices à Suresnes et dans les Hauts-de-Seine.
                   </p>
-                  {/* ... Rest of your text ... */}
+
+                  <p>
+                    Nous sommes diplômés en tant que serrurier dépanneur auprès de la <strong>FMSD</strong> et avons suivi plusieurs formations spécialisées dans les domaines suivants :
+                  </p>
+
+                  <ul className="space-y-3 pl-5 list-disc marker:text-[#d4af37]">
+                    <li>Taillage et reproduction de clés</li>
+                    <li>Serrurerie dépannage</li>
+                    <li>Vitrerie d’urgence</li>
+                    <li>Serrurerie automobile</li>
+                    <li>Programmation et reproduction de clés automobiles</li>
+                  </ul>
+
+                  <p>
+                    Notre objectif est de proposer un service sérieux, rapide et professionnel aussi bien pour les particuliers que pour les professionnels.
+                  </p>
+
+                  <p>
+                    Grâce à notre expérience et à notre savoir-faire, nous accompagnons nos clients avec des solutions adaptées pour tous types de besoins en serrurerie, sécurité et multiservices du quotidien.
+                  </p>
+
+                  <p>
+                    Nous intervenons pour :
+                  </p>
+
+                  <ul className="space-y-3 pl-5 list-disc marker:text-[#d4af37]">
+                    <li>L’ouverture de portes claquées ou verrouillées</li>
+                    <li>Le remplacement et la réparation de serrures</li>
+                    <li>Les urgences serrurerie 24h/24</li>
+                    <li>La reproduction de clés et badges</li>
+                    <li>La serrurerie automobile</li>
+                    <li>La programmation de clés de voiture</li>
+                    <li>La cordonnerie et réparation de chaussures</li>
+                    <li>Les plaques professionnelles et gravures personnalisées</li>
+                    <li>Ainsi que différents services multiservices du quotidien</li>
+                  </ul>
+
+                  <p>
+                    Nous mettons un point d’honneur à offrir :
+                  </p>
+
+                  <ul className="space-y-3 pl-5 list-disc marker:text-[#d4af37]">
+                    <li>Un accueil de proximité</li>
+                    <li>Des conseils adaptés à chaque situation</li>
+                    <li>Un travail propre et soigné</li>
+                    <li>Des tarifs transparents</li>
+                    <li>Une intervention rapide et efficace</li>
+                  </ul>
+
+                  <p>
+                    Basés à Suresnes, nous intervenons rapidement dans les Hauts-de-Seine ainsi que dans les villes voisines afin de répondre efficacement à vos besoins en serrurerie et dépannage d’urgence.
+                  </p>
+
+                  <p>
+                    Que ce soit pour une urgence, une reproduction de clé, une réparation ou un conseil, notre équipe reste disponible pour vous apporter un service fiable et professionnel.
+                  </p>
                 </div>
 
                 <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -98,7 +153,10 @@ export default function AboutClient() {
                     "Devis transparent",
                     "Intervention Hauts-de-Seine",
                   ].map((item) => (
-                    <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#1c2430]/5 bg-white/50 px-4 py-4 shadow-sm transition hover:border-[#d4af37]/30">
+                    <div
+                      key={item}
+                      className="flex items-center gap-3 rounded-2xl border border-[#1c2430]/5 bg-white/50 px-4 py-4 shadow-sm transition hover:border-[#d4af37]/30"
+                    >
                       <ShieldCheck className="h-5 w-5 text-[#d4af37]" />
                       <span className="text-sm font-semibold">{item}</span>
                     </div>
@@ -107,7 +165,7 @@ export default function AboutClient() {
               </div>
             </motion.div>
 
-            {/* RIGHT SIDE (Sticky) */}
+            {/* RIGHT SIDE */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -116,13 +174,25 @@ export default function AboutClient() {
             >
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white p-3 shadow-2xl bg-white/40">
                 <div className="relative aspect-4/5 overflow-hidden rounded-[2rem]">
-                  <Image src={Nous} alt="Atelier" fill className="object-cover" priority />
+                  <Image
+                    src={Nous}
+                    alt="Atelier"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+
                   <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4 text-[#d4af37]" />
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/80">Zone d’intervention</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-white/80">
+                        Zone d’intervention
+                      </p>
                     </div>
-                    <p className="mt-1 text-sm font-medium text-white">Suresnes · Hauts-de-Seine</p>
+
+                    <p className="mt-1 text-sm font-medium text-white">
+                      Suresnes · Hauts-de-Seine
+                    </p>
                   </div>
                 </div>
               </div>
@@ -130,8 +200,14 @@ export default function AboutClient() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 <div className="rounded-3xl border border-white bg-white/80 p-6 shadow-xl shadow-black/5">
                   <Clock className="h-5 w-5 text-[#d4af37]" />
-                  <p className="mt-3 text-sm font-bold">Horaires boutique</p>
-                  <p className="text-sm text-[#1c2430]/60">Lun–Sam 9h–19h · Dépannage 24h/24</p>
+
+                  <p className="mt-3 text-sm font-bold">
+                    Horaires boutique
+                  </p>
+
+                  <p className="text-sm text-[#1c2430]/60">
+                    Lun–Sam 9h–19h · Dépannage 24h/24
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -146,12 +222,21 @@ export default function AboutClient() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            // ... your schema ...
+            name: "Multiservices de la Paix",
+            image: "/equipe-multiservices-de-la-paix.png",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Suresnes",
+              addressRegion: "Hauts-de-Seine",
+              addressCountry: "FR",
+            },
+            telephone: contact.phone.display,
+            areaServed: "Hauts-de-Seine",
+            url: "https://www.multiservicesdelapaix.fr",
           }),
         }}
       />
-      
-      {/* FINAL FIX: The Urgence component is now inside the main wrapper, ensuring no gap */}
+
       <Urgence />
     </main>
   );

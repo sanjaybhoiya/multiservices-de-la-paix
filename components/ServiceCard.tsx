@@ -118,14 +118,11 @@ export default function ServiceCard({
           href={`tel:${phone.raw}`}
           className="
             flex-1
-            rounded-xl
-            bg-[#1c2430]
-            text-white
-            text-sm font-medium
-            py-2.5
-            text-center
-            hover:bg-[#d4af37]
-            transition-all duration-300
+    rounded-xl
+    btn-gold-hover
+    text-sm font-medium
+    py-2.5
+    text-center
           "
         >
           Appeler

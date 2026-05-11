@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { db } from "@/lib/db"; // 
-
-const resend = new Resend(process.env.RESEND_API_KEY!);
+import { db } from "@/lib/db";
 
 /* =========================
    BASIC SANITIZER
@@ -24,6 +22,23 @@ const isValidEmail = (email: string) =>
    ========================= */
 export async function POST(req: Request) {
   try {
+    /* =========================
+       ENV CHECK (SAFE)
+       ========================= */
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const contactEmail = process.env.CONTACT_EMAIL;
+    const forwardEmail = process.env.FORWARD_EMAIL;
+
+    if (!resendApiKey || !contactEmail) {
+      console.error("❌ Missing required environment variables");
+      return NextResponse.json(
+        { success: false, message: "Server not configured" },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(resendApiKey);
+
     const body = await req.json();
 
     const nom = safe(body.nom);
@@ -33,7 +48,7 @@ export async function POST(req: Request) {
     const message = safe(body.message);
 
     /* =========================
-       VALIDATION (STRICT)
+       VALIDATION
        ========================= */
     if (!nom || !email || !message) {
       return NextResponse.json(
@@ -50,21 +65,7 @@ export async function POST(req: Request) {
     }
 
     /* =========================
-       ENV SAFETY CHECK
-       ========================= */
-    if (!process.env.RESEND_API_KEY) {
-      console.error("❌ RESEND_API_KEY missing");
-      return NextResponse.json(
-        { success: false, message: "Server not configured" },
-        { status: 500 }
-      );
-    }
-
-    const contactEmail = process.env.CONTACT_EMAIL!;
-    const forwardEmail = process.env.FORWARD_EMAIL;
-
-    /* =========================
-       💾 SAVE TO DATABASE (HOSTINGER MYSQL)
+       SAVE TO DATABASE
        ========================= */
     try {
       await db.execute(
@@ -96,7 +97,7 @@ export async function POST(req: Request) {
     `;
 
     /* =========================
-       1. MAIN EMAIL
+       MAIN EMAIL
        ========================= */
     const mainEmail = await resend.emails.send({
       from: "Multi Services <contact@multiservicesdelapaix.fr>",
@@ -108,7 +109,7 @@ export async function POST(req: Request) {
     console.log("✅ Main email sent:", mainEmail);
 
     /* =========================
-       2. ADMIN COPY
+       ADMIN COPY
        ========================= */
     if (forwardEmail) {
       try {
@@ -126,7 +127,7 @@ export async function POST(req: Request) {
     }
 
     /* =========================
-       3. AUTO REPLY
+       AUTO REPLY
        ========================= */
     try {
       const autoReply = await resend.emails.send({

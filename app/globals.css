@@ -6,7 +6,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* =========================================================
    DESIGN TOKENS
@@ -114,6 +114,10 @@
   }
 
   .text-gold {
+    color: var(--gold);
+  }
+
+  .hover\:text-gold:hover {
     color: var(--gold);
   }
 
@@ -310,6 +314,18 @@
   position: sticky;
   top: 0;
   z-index: 50;
+}
+.btn-gold-hover {
+  background: #162033; /* navy base */
+  color: white;
+  transition: all 0.35s ease;
+}
+
+.btn-gold-hover:hover {
+  background: var(--gold);
+  color: #1c2430;
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+  transform: translateY(-1px);
 }
 
 .bg-navy {

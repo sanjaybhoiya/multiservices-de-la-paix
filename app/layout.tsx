@@ -8,6 +8,7 @@ import { Noto_Sans, Playfair_Display } from "next/font/google";
 import { cn } from "@/lib/utils";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next"
 
 // ─────────────────────────────────────────────────────────────────────────────
 // FONTS
@@ -512,7 +513,7 @@ export default function RootLayout({
         <CookieBanner />
         <WhatsAppButton />
 
-       
+       <Analytics/>
       </body>
     </html>
   );
