@@ -3,9 +3,9 @@ import ContactClient from "./contact-client";
 
 export const metadata: Metadata = {
   title:
-    "Contact & Devis Gratuit | Serrurier & Vitrier Professionnel",
+    "Contact & Devis Gratuit | Serrurier Suresnes 24h/24 & Dépannage Urgent",
   description:
-    "Besoin d'un dépannage d'urgence ou d'un devis gratuit ? Contactez-nous pour une intervention rapide 24h/24 et 7j/7 en serrurerie et vitrerie.",
+    "Besoin d’un serrurier en urgence à Suresnes ou dans les Hauts-de-Seine ? Contactez-nous pour un dépannage rapide 24h/24 et 7j/7, devis gratuit, intervention immédiate en serrurerie, ouverture de porte et vitrerie.",
 };
 
 export default function ContactPage() {

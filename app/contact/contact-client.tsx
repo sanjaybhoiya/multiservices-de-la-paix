@@ -41,7 +41,8 @@ export default function ContactClient() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#f5f0e6]"> 
+    <main className="min-h-screen bg-[#f5f0e6]">
+
       {/* HERO SECTION */}
       <section className="navy-section relative overflow-hidden py-16 sm:py-24 lg:py-32">
         <div className="absolute inset-0 pointer-events-none">
@@ -81,8 +82,9 @@ export default function ContactClient() {
       {/* CONTENT SECTION */}
       <section className="relative overflow-hidden py-16 sm:py-24 lg:py-28 text-[#1c2430]">
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
+
           <div className="grid gap-12 lg:grid-cols-12 items-start">
-            
+
             {/* CONTACT INFO CARD */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -91,6 +93,7 @@ export default function ContactClient() {
               className="lg:col-span-5"
             >
               <div className="rounded-[2rem] border border-white/60 bg-white/80 p-8 shadow-2xl shadow-black/5 backdrop-blur-2xl sm:p-10">
+
                 <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">
                   ◆ Assistance serrurerie
                 </p>
@@ -105,25 +108,36 @@ export default function ContactClient() {
                 </div>
 
                 <div className="mt-10 space-y-8">
+
                   {contactItems.map(({ icon: Icon, label, value, href }) => (
                     <div key={label} className="flex items-start gap-5">
+
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#1c2430]/5 bg-white shadow-sm text-[#d4af37]">
                         <Icon className="h-5 w-5" />
                       </div>
+
                       <div className="flex flex-col">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#1c2430]/40">
                           {label}
                         </span>
+
                         {href ? (
-                          <a href={href} className="mt-1 font-serif text-xl font-medium transition-colors hover:text-[#d4af37]">
+                          <a
+                            href={href}
+                            className="mt-1 font-serif text-xl font-medium transition-colors hover:text-[#d4af37]"
+                          >
                             {value}
                           </a>
                         ) : (
-                          <span className="mt-1 font-serif text-xl font-medium">{value}</span>
+                          <span className="mt-1 font-serif text-xl font-medium">
+                            {value}
+                          </span>
                         )}
                       </div>
+
                     </div>
                   ))}
+
                 </div>
               </div>
             </motion.div>
@@ -135,15 +149,17 @@ export default function ContactClient() {
               viewport={{ once: true }}
               className="lg:col-span-7"
             >
-              <Suspense fallback={<div className="h-125 w-full animate-pulse rounded-[2rem] bg-black/5" />}>
+              <Suspense fallback={
+                <div className="h-125 w-full animate-pulse rounded-[2rem] bg-black/5" />
+              }>
                 <ContactForm />
               </Suspense>
             </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* FINAL COMPONENT */}
       <Urgence />
     </main>
   );

@@ -85,8 +85,7 @@ export default function ContactForm() {
   const validate = () => {
     const e: Record<string, string> = {};
 
-    const emailRegex =
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const frenchPhoneRegex =
       /^(?:(?:\+33|0)[1-9])(?:[\s.-]?\d{2}){4}$/;
@@ -120,8 +119,7 @@ export default function ContactForm() {
       e.message = "Message invalide";
     }
 
-    if (!form.consent)
-      e.consent = "Obligatoire";
+    if (!form.consent) e.consent = "Obligatoire";
 
     setErrors(e);
 
@@ -219,20 +217,20 @@ export default function ContactForm() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative rounded-4xl border border-white/30 bg-white/70 backdrop-blur-xl shadow-2xl p-8 md:p-12 overflow-hidden"
+        className="relative rounded-4xl border border-white/30 bg-white/70 backdrop-blur-xl shadow-2xl p-6 sm:p-8 md:p-12 overflow-hidden"
       >
         <div className="absolute -top-20 -right-20 h-72 w-72 bg-[#d4af37]/10 blur-3xl rounded-full" />
 
         <AnimatePresence mode="wait">
           {status === "success" ? (
             <motion.div
-              className="flex flex-col items-center text-center py-16"
+              className="flex flex-col items-center text-center py-12 sm:py-16"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <CheckCircle2 className="h-14 w-14 text-[#d4af37]" />
+              <CheckCircle2 className="h-12 w-12 sm:h-14 sm:w-14 text-[#d4af37]" />
 
-              <h3 className="mt-4 text-2xl font-semibold">
+              <h3 className="mt-4 text-xl sm:text-2xl font-semibold">
                 Message envoyé
               </h3>
 
@@ -241,12 +239,12 @@ export default function ContactForm() {
               </p>
             </motion.div>
           ) : (
-            <motion.form onSubmit={handleSubmit} className="space-y-6">
-              <h3 className="text-2xl font-semibold text-[#1c2430]">
+            <motion.form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+              <h3 className="text-xl sm:text-2xl font-semibold text-[#1c2430]">
                 Contactez-nous
               </h3>
 
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <Field
                   label="Nom"
                   placeholder="Nom"
@@ -264,7 +262,7 @@ export default function ContactForm() {
                 />
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <Field
                   label="Email"
                   placeholder="email@exemple.fr"
@@ -309,7 +307,6 @@ export default function ContactForm() {
                 onChange={(v) => update("message", v)}
               />
 
-              {/* Honeypot anti-spam */}
               <input
                 type="text"
                 tabIndex={-1}
@@ -325,7 +322,6 @@ export default function ContactForm() {
                   checked={form.consent}
                   onChange={(e) => update("consent", e.target.checked)}
                 />
-
                 J'accepte la politique de confidentialité
               </label>
 
