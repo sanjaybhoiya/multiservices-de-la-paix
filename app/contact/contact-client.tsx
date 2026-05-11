@@ -41,7 +41,7 @@ export default function ContactClient() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#f5f0e6]">
+    <main className="min-h-screen bg-[#f5f0e6] overflow-x-hidden">
 
       {/* HERO SECTION */}
       <section className="navy-section relative overflow-hidden py-16 sm:py-24 lg:py-32">
@@ -80,25 +80,26 @@ export default function ContactClient() {
       </section>
 
       {/* CONTENT SECTION */}
-      <section className="relative overflow-hidden py-16 sm:py-24 lg:py-28 text-[#1c2430]">
-        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
+      <section className="relative w-full overflow-hidden py-16 sm:py-24 lg:py-28 text-[#1c2430]">
+        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 w-full">
 
-          <div className="grid gap-12 lg:grid-cols-12 items-start">
+          {/* CRITICAL FIX: min-w-0 prevents grid overflow */}
+          <div className="grid gap-12 lg:grid-cols-12 items-start w-full min-w-0">
 
             {/* CONTACT INFO CARD */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-5"
+              className="lg:col-span-5 w-full min-w-0"
             >
-              <div className="rounded-[2rem] border border-white/60 bg-white/80 p-8 shadow-2xl shadow-black/5 backdrop-blur-2xl sm:p-10">
+              <div className="w-full min-w-0 rounded-[2rem] border border-white/60 bg-white/80 p-6 sm:p-8 shadow-2xl shadow-black/5 backdrop-blur-2xl">
 
                 <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">
                   ◆ Assistance serrurerie
                 </p>
 
-                <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl text-[#162033]">
+                <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-[#162033]">
                   Intervention rapide et devis transparent.
                 </h2>
 
@@ -110,13 +111,13 @@ export default function ContactClient() {
                 <div className="mt-10 space-y-8">
 
                   {contactItems.map(({ icon: Icon, label, value, href }) => (
-                    <div key={label} className="flex items-start gap-5">
+                    <div key={label} className="flex items-start gap-4 min-w-0">
 
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#1c2430]/5 bg-white shadow-sm text-[#d4af37]">
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <div className="flex flex-col">
+                      <div className="flex flex-col min-w-0">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#1c2430]/40">
                           {label}
                         </span>
@@ -124,12 +125,12 @@ export default function ContactClient() {
                         {href ? (
                           <a
                             href={href}
-                            className="mt-1 font-serif text-xl font-medium transition-colors hover:text-[#d4af37]"
+                            className="mt-1 font-serif text-lg sm:text-xl font-medium wrap-break-word hover:text-[#d4af37] transition-colors"
                           >
                             {value}
                           </a>
                         ) : (
-                          <span className="mt-1 font-serif text-xl font-medium">
+                          <span className="mt-1 font-serif text-lg sm:text-xl font-medium wrap-break-word">
                             {value}
                           </span>
                         )}
@@ -147,10 +148,10 @@ export default function ContactClient() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-7"
+              className="lg:col-span-7 w-full min-w-0"
             >
               <Suspense fallback={
-                <div className="h-125 w-full animate-pulse rounded-[2rem] bg-black/5" />
+                <div className="h-96 w-full animate-pulse rounded-[2rem] bg-black/5" />
               }>
                 <ContactForm />
               </Suspense>
