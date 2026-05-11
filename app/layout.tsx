@@ -490,31 +490,36 @@ export default function RootLayout({
       
       </head>
 
-      <body className="min-h-screen flex flex-col">
-        {/* Skip-to-content link: accessibility + helps crawlers find main content */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-black focus:rounded"
-        >
-          Aller au contenu principal
-        </a>
+      <body className="min-h-screen flex flex-col overflow-x-hidden max-w-[100vw]">
+  {/* Safety wrapper to prevent iOS Safari horizontal overflow */}
+  <div className="overflow-x-hidden w-full min-w-0">
+    
+    {/* Skip-to-content link: accessibility + helps crawlers find main content */}
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-black focus:rounded"
+    >
+      Aller au contenu principal
+    </a>
 
-        <RevealProvider>
-          <Header />
+    <RevealProvider>
+      <Header />
 
-          {/* id="main-content" is referenced by the skip link above */}
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
+      {/* id="main-content" is referenced by the skip link above */}
+      <main id="main-content" className="flex-1 min-w-0">
+        {children}
+      </main>
 
-          <Footer />
-        </RevealProvider>
+      <Footer />
+    </RevealProvider>
 
-        <CookieBanner />
-        <WhatsAppButton />
+  </div>
 
-       <Analytics/>
-      </body>
+  <CookieBanner />
+  <WhatsAppButton />
+
+  <Analytics />
+</body>
     </html>
   );
 }
