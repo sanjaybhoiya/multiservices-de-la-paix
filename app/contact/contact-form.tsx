@@ -25,7 +25,7 @@ function Field({
   isTextArea,
 }: FieldProps) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-1 w-full min-w-0">
       <label className="text-[11px] uppercase tracking-[0.2em] text-[#1c2430]/60">
         {label}
       </label>
@@ -36,7 +36,7 @@ function Field({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-transparent border-b border-[#1c2430]/20 focus:border-[#d4af37] py-3 text-sm outline-none transition text-[#1c2430] placeholder:text-[#1c2430]/40 resize-none"
+          className="w-full max-w-full bg-transparent border-b border-[#1c2430]/20 focus:border-[#d4af37] py-3 text-sm outline-none transition text-[#1c2430] placeholder:text-[#1c2430]/40 resize-none"
         />
       ) : (
         <input
@@ -44,12 +44,14 @@ function Field({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-transparent border-b border-[#1c2430]/20 focus:border-[#d4af37] py-3 text-sm outline-none transition text-[#1c2430] placeholder:text-[#1c2430]/40"
+          className="w-full max-w-full bg-transparent border-b border-[#1c2430]/20 focus:border-[#d4af37] py-3 text-sm outline-none transition text-[#1c2430] placeholder:text-[#1c2430]/40"
         />
       )}
 
       {error && (
-        <p className="text-[10px] text-red-500 animate-pulse">{error}</p>
+        <p className="text-[10px] text-red-500 animate-pulse">
+          {error}
+        </p>
       )}
     </div>
   );
@@ -99,7 +101,6 @@ export default function ContactForm() {
     ];
 
     if (!form.nom.trim()) e.nom = "Requis";
-
     if (!form.prenom.trim()) e.prenom = "Requis";
 
     if (!emailRegex.test(form.email))
@@ -122,7 +123,6 @@ export default function ContactForm() {
     if (!form.consent) e.consent = "Obligatoire";
 
     setErrors(e);
-
     return Object.keys(e).length === 0;
   };
 
@@ -169,7 +169,6 @@ export default function ContactForm() {
       }
 
       setLastSubmit(Date.now());
-
       setStatus("success");
 
       toast.success("Message envoyé");
@@ -190,9 +189,7 @@ export default function ContactForm() {
       }, 3000);
     } catch (err) {
       console.error(err);
-
       setStatus("error");
-
       toast.error("Erreur serveur");
 
       setTimeout(() => setStatus("idle"), 3000);
@@ -203,21 +200,13 @@ export default function ContactForm() {
 
   return (
     <>
-      <Toaster
-        position="top-right"
-        richColors
-        toastOptions={{
-          style: {
-            zIndex: 999999,
-          },
-        }}
-      />
+      <Toaster position="top-right" richColors />
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative rounded-4xl border border-white/30 bg-white/70 backdrop-blur-xl shadow-2xl p-6 sm:p-8 md:p-12 overflow-hidden"
+        className="relative w-full max-w-full min-w-0 rounded-4xl border border-white/30 bg-white/70 backdrop-blur-xl shadow-2xl p-5 sm:p-8 md:p-12 overflow-hidden"
       >
         <div className="absolute -top-20 -right-20 h-72 w-72 bg-[#d4af37]/10 blur-3xl rounded-full" />
 
@@ -239,12 +228,15 @@ export default function ContactForm() {
               </p>
             </motion.div>
           ) : (
-            <motion.form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+            <motion.form
+              onSubmit={handleSubmit}
+              className="space-y-5 sm:space-y-6 w-full min-w-0"
+            >
               <h3 className="text-xl sm:text-2xl font-semibold text-[#1c2430]">
                 Contactez-nous
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
                 <Field
                   label="Nom"
                   placeholder="Nom"
@@ -262,7 +254,7 @@ export default function ContactForm() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
                 <Field
                   label="Email"
                   placeholder="email@exemple.fr"
@@ -280,7 +272,7 @@ export default function ContactForm() {
                 />
               </div>
 
-              <div>
+              <div className="w-full">
                 <label className="text-[11px] uppercase tracking-[0.2em] text-[#1c2430]/60">
                   Type de demande
                 </label>
