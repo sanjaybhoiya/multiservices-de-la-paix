@@ -12,11 +12,31 @@ import {
 } from "lucide-react";
 
 const services = [
-  { icon: Home, title: "Serrurerie habitation" },
-  { icon: Car, title: "Serrurerie automobile" },
-  { icon: Footprints, title: "Cordonnerie" },
-  { icon: KeyRound, title: "Clés & reproduction" },
-  { icon: Wrench, title: "Dépannage urgence" },
+  {
+    icon: Home,
+    title: "Serrurerie habitation",
+    slug: "serrurerie-habitation",
+  },
+  {
+    icon: Car,
+    title: "Serrurerie automobile",
+    slug: "serrurerie-automobile",
+  },
+  {
+    icon: Footprints,
+    title: "Cordonnerie",
+    slug: "cordonnerie",
+  },
+  {
+    icon: Wrench,
+    title: "Vitrerie",
+    slug: "vitrerie",
+  },
+  {
+    icon: KeyRound,
+    title: "Plaques & gravure",
+    slug: "gravure-plaques",
+  },
 ];
 
 export default function Services() {
@@ -24,7 +44,7 @@ export default function Services() {
     <section className="py-24 bg-[#f5f0e6] text-[#1c2430]">
       <div className="mx-auto max-w-7xl px-6">
 
-        {/* ================= HEADER ================= */}
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,12 +65,12 @@ export default function Services() {
           </p>
         </motion.div>
 
-        {/* ================= CARDS ================= */}
+        {/* CARDS */}
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
 
-          {services.map(({ icon: Icon, title }, index) => (
+          {services.map(({ icon: Icon, title, slug }, index) => (
             <motion.article
-              key={title}
+              key={slug}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -58,13 +78,13 @@ export default function Services() {
               className="group relative rounded-xl border border-[#e2d6c6] bg-white/80 backdrop-blur-md p-6 overflow-hidden transition-all duration-500 hover:-translate-y-2"
             >
 
-              {/* ====== SOFT APPLE GLOW BACKGROUND ====== */}
+              {/* glow */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500">
                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#d4af37]/10 blur-3xl rounded-full" />
                 <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#d4af37]/10 blur-3xl rounded-full" />
               </div>
 
-              {/* ICON */}
+              {/* icon */}
               <div className="relative flex items-center justify-between mb-6">
 
                 <span className="h-11 w-11 rounded-full border border-[#e2d6c6] flex items-center justify-center text-[#1c2430]/70 group-hover:text-[#d4af37] group-hover:border-[#d4af37] transition-all duration-300">
@@ -77,31 +97,30 @@ export default function Services() {
 
               </div>
 
-              {/* TITLE */}
+              {/* title */}
               <h3 className="relative font-serif text-lg text-[#1c2430] group-hover:text-[#d4af37] transition-colors duration-300">
                 {title}
               </h3>
 
-              {/* SUBTLE LINE */}
+              {/* line */}
               <div className="relative mt-3 h-px w-0 bg-[#d4af37] group-hover:w-12 transition-all duration-500" />
 
               {/* CTA */}
               <Link
-                href="/services"
+                href={`/services/${slug}`}
                 className="relative mt-6 inline-flex items-center gap-2 text-[#d4af37] font-medium group"
               >
                 Voir le service
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
-              {/* ====== APPLE BORDER GLOW ====== */}
+              {/* border */}
               <div className="absolute inset-0 rounded-xl border border-transparent group-hover:border-[#d4af37]/30 transition duration-500 pointer-events-none" />
 
             </motion.article>
           ))}
 
         </div>
-
 
       </div>
     </section>

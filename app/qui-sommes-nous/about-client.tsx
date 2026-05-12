@@ -12,10 +12,10 @@ export default function AboutClient() {
 
   return (
     <main className="bg-[#f5f0e6]">
-      
+
       {/* ================= HERO ================= */}
       <section className="navy-section relative overflow-hidden py-20 sm:py-24 lg:py-32">
-        
+
         {/* BACKGROUND GLOW */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute left-[-10%] top-[-10%] h-96 w-96 rounded-full bg-[#d4af37]/10 blur-[120px]" />
@@ -66,7 +66,7 @@ export default function AboutClient() {
       <section className="relative py-16 sm:py-24 lg:py-28 text-[#1c2430]">
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
-            
+
             {/* LEFT CONTENT */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -75,7 +75,7 @@ export default function AboutClient() {
               className="lg:col-span-7"
             >
               <div className="rounded-[2.5rem] border border-white/60 bg-white/80 p-8 shadow-2xl shadow-black/5 backdrop-blur-2xl sm:p-10 lg:p-14">
-                
+
                 <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#d4af37]">
                   ◆ Artisan serrurier certifié FMSD
                 </p>
@@ -178,6 +178,7 @@ export default function AboutClient() {
                     src={Nous}
                     alt="Atelier"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                     priority
                   />
@@ -206,7 +207,7 @@ export default function AboutClient() {
                   </p>
 
                   <p className="text-sm text-[#1c2430]/60">
-                    Lun–Sam 9h–19h · Dépannage 24h/24
+                    Lundi–Samedi 9h–19h · Dépannage 24h/24
                   </p>
                 </div>
               </div>

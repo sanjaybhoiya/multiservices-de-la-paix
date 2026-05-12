@@ -36,7 +36,7 @@ export default function ContactClient() {
     {
       icon: Clock,
       label: "Horaires boutique",
-      value: "Lun–Sam 9h–19h · Dépannage 24/7",
+      value: "Lundi–Samedi 9h–19h · Dépannage 24/7",
     },
   ];
 

@@ -123,7 +123,7 @@ export function Footer() {
             </li>
 
             <li className="pt-6 mt-6 border-t border-white/10 text-xs text-white/40">
-              Lun–Sam · 9h–19h · Dim fermé · Dépannage 24/7
+              Lundi–Samdi · 9h–19h · dimanche fermé · Dépannage 24/7
             </li>
 
           </ul>

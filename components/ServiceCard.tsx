@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import Link from "next/link";
-import { siteConfig } from "@/lib/site";
+import CallButton from "@/components/CallButton";
+import DevisButton from "@/components/DevisButton";
 
 type ServiceCardProps = {
   icon: React.ElementType;
@@ -13,21 +13,12 @@ type ServiceCardProps = {
 };
 
 const card: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-    scale: 0.98,
-    filter: "blur(6px)",
-  },
+  hidden: { opacity: 0, y: 25, scale: 0.98 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1],
-    },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -38,115 +29,91 @@ export default function ServiceCard({
   index,
   href,
 }: ServiceCardProps) {
-  const { phone } = siteConfig.contact;
-
   return (
     <motion.article
       variants={card}
-      whileHover={{
-        y: -8,
-        transition: { duration: 0.3 },
-      }}
+      whileHover={{ y: -8 }}
       className="
         group relative flex flex-col h-full
-        rounded-2xl
-        bg-white/80 backdrop-blur-xl
+        rounded-3xl
+        bg-white
         border border-black/5
-        shadow-[0_8px_30px_rgb(0,0,0,0.04)]
-        hover:shadow-[0_20px_60px_rgb(0,0,0,0.08)]
-        transition-all duration-500
+        shadow-[0_10px_40px_rgb(0,0,0,0.06)]
+        hover:shadow-[0_25px_70px_rgb(0,0,0,0.12)]
+        transition-all duration-300
         overflow-hidden
       "
     >
-      {/* soft glow hover */}
-      <div
-        className="
-          pointer-events-none absolute inset-0
-          opacity-0 group-hover:opacity-100
-          transition-opacity duration-500
-          bg-linear-to-br from-[#d4af37]/5 via-transparent to-transparent
-        "
-      />
+      {/* TOP ACCENT */}
+      <div className="h-0.5 w-full bg-linear-to-r from-transparent via-[#d4af37] to-transparent opacity-40" />
 
-      {/* ================= HEADER ================= */}
-      <div className="flex items-center justify-between p-6 pb-0">
-
-        {/* ICON */}
-        <div
-          className="
-            h-11 w-11 rounded-xl
+      {/* HEADER */}
+      <div className="flex items-center justify-between px-6 pt-6">
+        <div className="flex items-center gap-4">
+          <div className="
+            h-11 w-11 rounded-2xl
             flex items-center justify-center
             bg-[#f5f5f5]
             text-[#1c2430]/70
             group-hover:text-[#d4af37]
-            group-hover:bg-[#fff7e6]
-            transition-all duration-500
-          "
-        >
-          <Icon className="h-5 w-5" />
-        </div>
+            transition
+          ">
+            <Icon className="h-5 w-5" />
+          </div>
 
-        {/* INDEX */}
-        <span className="text-[11px] tracking-[0.25em] text-black/30">
-          {String(index).padStart(2, "0")}
-        </span>
+          <div className="flex flex-col">
+            <span className="text-[10px] tracking-[0.25em] text-black/40">
+              SERVICE {String(index).padStart(2, "0")}
+            </span>
+
+            <h3 className="text-[15px] font-semibold text-[#1c2430] leading-snug">
+              {title}
+            </h3>
+          </div>
+        </div>
       </div>
 
-      {/* ================= CONTENT ================= */}
-      <div className="flex-1 px-6 pt-5">
-        <h3
-          className="
-            text-lg font-semibold
-            text-[#1c2430]
-            group-hover:text-[#d4af37]
-            transition-colors duration-300
-          "
-        >
-          {title}
-        </h3>
-
-        <p className="mt-3 text-sm leading-relaxed text-black/60">
+      {/* CONTENT (CLEAN BULLETS STYLE) */}
+      <div className="px-6 pt-4 pb-5">
+        <p className="text-sm text-black/60 leading-relaxed">
           {description}
         </p>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          <span className="text-[11px] px-2 py-1 rounded-full bg-[#f5f5f5] text-black/60">
+            Intervention rapide
+          </span>
+          <span className="text-[11px] px-2 py-1 rounded-full bg-[#f5f5f5] text-black/60">
+            Devis gratuit
+          </span>
+          <span className="text-[11px] px-2 py-1 rounded-full bg-[#f5f5f5] text-black/60">
+            24h/24
+          </span>
+        </div>
       </div>
 
-      {/* ================= CTA ================= */}
-      <div className="p-6 pt-5 flex gap-3">
+      {/* CTA */}
+      <div className="px-6 pb-6 flex gap-3 mt-auto">
+        <CallButton className="
+          flex-1 rounded-2xl bg-[#1c2430] text-white
+          py-2.5 text-sm font-medium text-center
+          hover:bg-black transition
+        " />
 
-        {/* CALL */}
-        <a
-          href={`tel:${phone.raw}`}
+        <DevisButton
+          service={href}
           className="
-            flex-1
-    rounded-xl
-    btn-gold-hover
-    text-sm font-medium
-    py-2.5
-    text-center
-          "
-        >
-          Appeler
-        </a>
-
-        {/* QUOTE */}
-        <Link
-          href={href}
-          className="
-            flex-1
-            rounded-xl
-            border border-black/10
-            text-sm font-medium
+            flex-1 rounded-2xl
+            border border-[#d4af37]/30
+            bg-white
+            text-sm font-medium text-center
             py-2.5
-            text-center
             text-[#1c2430]
             hover:border-[#d4af37]
             hover:text-[#d4af37]
-            transition-all duration-300
+            transition
           "
-        >
-          Devis
-        </Link>
-
+        />
       </div>
     </motion.article>
   );

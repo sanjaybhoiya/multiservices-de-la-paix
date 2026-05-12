@@ -11,10 +11,10 @@ export default function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="WhatsApp"
       className="
-        fixed bottom-6 right-6 z-50
+        fixed bottom-5 right-5 z-50
 
         flex items-center justify-center
-        h-14 w-14 rounded-full
+        h-10 w-10 rounded-full
 
         bg-green-500 text-white
         shadow-lg
@@ -26,7 +26,7 @@ export default function WhatsAppButton() {
       {/* Glow Ring */}
       <span
         className="
-          absolute h-14 w-14 rounded-full
+          absolute h-10 w-10 rounded-full
           bg-green-400/40 blur-md
           scale-110
           animate-pulse
@@ -36,14 +36,14 @@ export default function WhatsAppButton() {
       {/* Outer Ring */}
       <span
         className="
-          absolute h-14 w-14 rounded-full
+          absolute h-10 w-10 rounded-full
           border border-green-300/40
           scale-125 opacity-60
         "
       />
 
       {/* Icon */}
-      <FaWhatsapp className="h-6 w-6 relative z-10" />
+      <FaWhatsapp className="h-5 w-5 relative z-10" />
     </a>
   );
 }

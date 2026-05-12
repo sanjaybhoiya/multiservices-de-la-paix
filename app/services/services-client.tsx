@@ -31,7 +31,7 @@ export default function ServicesClient({
 }) {
   return (
     <>
-      {/* ================= HERO ================= */}
+      {/* HERO */}
       <section className="navy-section relative z-10 py-28 overflow-hidden">
         <div className="relative z-10 mx-auto max-w-7xl px-6">
           <motion.div
@@ -41,15 +41,13 @@ export default function ServicesClient({
             transition={{ duration: 0.9 }}
             className="max-w-3xl"
           >
-            {/* TOP LABEL */}
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-xl animate-pulse">
               <span className="h-2 w-2 rounded-full bg-[#d4af37]" />
               <span className="text-[11px] uppercase tracking-[0.25em] text-white/75">
-                Dépannage serrurerie · 24h/24 · Paris & Île-de-France
+                Dépannage serrurerie · 24h/24 · Suresnes & Île-de-France
               </span>
             </div>
 
-            {/* TITLE */}
             <h1 className="display mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-navy-foreground leading-[1.05]">
               Serrurerie & multiservices
               <br />
@@ -58,17 +56,18 @@ export default function ServicesClient({
               </span>
             </h1>
 
-            {/* DESCRIPTION */}
             <p className="mt-6 text-base md:text-lg text-navy-foreground/70 leading-relaxed max-w-2xl">
               Ouverture de porte, dépannage serrurerie, reproduction de clés,
               serrurerie automobile, cordonnerie et multiservices pour
               particuliers et professionnels avec intervention rapide et devis clair.
             </p>
 
-            {/* TRUST BADGES */}
             <div className="mt-8 flex flex-wrap gap-3">
-              {["Intervention rapide", "Disponible 24h/24", "Devis gratuit", "Paris & IDF"].map((badge) => (
-                <div key={badge} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-navy-foreground/80 backdrop-blur">
+              {["Intervention rapide", "Disponible 24h/24", "Devis gratuit", "Suresnes & IDF"].map((badge) => (
+                <div
+                  key={badge}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-navy-foreground/80 backdrop-blur"
+                >
                   ✔ {badge}
                 </div>
               ))}
@@ -77,23 +76,21 @@ export default function ServicesClient({
         </div>
       </section>
 
-      {/* ================= SERVICES ================= */}
+      {/* SERVICES */}
       <section className="relative z-20 py-24 bg-[#f5f0e6] text-[#1c2430] overflow-hidden">
         <div className="mx-auto max-w-7xl px-6">
-          {/* SMALL LABEL */}
+
           <div className="mb-10">
             <p className="eyebrow text-[#1c2430]/60">
               ◆ Nos services
             </p>
           </div>
 
-          {/* GRID */}
           <motion.div
             variants={container}
             initial="hidden"
             whileInView="show"
-            // "amount: 0.1" ensures it triggers even if only a tiny part of the long mobile list is visible
-            viewport={{ once: true, amount: 0.1 }} 
+            viewport={{ once: true, amount: 0.1 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {services.map((service, i) => {
@@ -105,7 +102,7 @@ export default function ServicesClient({
                   icon={Icon}
                   title={service.title}
                   description={service.description}
-                  href={`/contact?service=${service.slug}`}
+                  href={`/contact?service=${service.slug}`}  
                   index={i + 1}
                 />
               );
@@ -114,10 +111,8 @@ export default function ServicesClient({
         </div>
       </section>
 
-      {/* ================= URGENCE ================= */}
       <Urgence />
 
-      {/* ================= SEO JSON-LD ================= */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

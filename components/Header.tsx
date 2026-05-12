@@ -2,8 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Menu, X, Mail, MapPin, Clock } from "lucide-react";
+import {
+  Phone,
+  Menu,
+  X,
+  Mail,
+  MapPin,
+  Clock3,
+} from "lucide-react";
 import { useEffect, useState } from "react";
+
 import logo from "@/assets/logo-multiservices.svg";
 import { siteConfig } from "@/lib/site";
 
@@ -17,15 +25,23 @@ export function Header() {
   const address = contact.address;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+    };
 
-    return () => window.removeEventListener("scroll", onScroll);
+    onScroll();
+
+    window.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
+
+    return () =>
+      window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -41,59 +57,106 @@ export function Header() {
 
   return (
     <header
-      className={`site-header navy-section ${scrolled ? "is-scrolled" : ""}`}
-      style={{
-        backgroundColor: scrolled ? "rgba(18, 26, 43, 0.92)" : undefined,
-      }}
+      className={`site-header navy-section border-b border-white/5 transition-all duration-300 ${
+        scrolled ? "backdrop-blur-xl" : ""
+      }`}
     >
-      {/* ================= TOP BAR ================= */}
+      {/* ===================================================== */}
+      {/* TOP BAR — DESKTOP ONLY */}
+      {/* ===================================================== */}
       <div
-        className={`overflow-hidden border-b border-white/10 text-[9px] sm:text-[10px] uppercase tracking-wider transition-all duration-300 ${
-          scrolled ? "max-h-0 opacity-0 border-b-0" : "max-h-16 opacity-100"
-        }`}
-      >
-        <div className="mx-auto max-w-7xl px-6 py-2 flex flex-col md:flex-row md:items-center md:justify-between text-white/70 gap-2 md:gap-4">
+  className={`
+    hidden lg:block
+    border-b border-white/5
+    overflow-hidden
+    transition-all duration-500 ease-out
+    ${
+      scrolled
+        ? "max-h-0 opacity-0 border-b-transparent py-0 -translate-y-full"
+        : "max-h-20 opacity-100 py-3 translate-y-0"
+    }
+  `}
+>
+        <div className="mx-auto max-w-7xl px-6 flex items-center justify-between">
 
-          <span className="flex items-center gap-2 whitespace-nowrap">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent inline-block" />
-            Dépannage {phone.availability} · Intervention rapide en Île-de-France
-          </span>
+          {/* LEFT */}
+          <div className="flex items-center gap-6 text-[11px] tracking-[0.18em] uppercase text-white/55">
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span className="flex items-center gap-1 whitespace-nowrap">
-              <Clock className="h-3 w-3 text-accent" />
-              Lun–Sam · 9h–19h · Dim fermé
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold pulse-dot" />
 
-            <span className="flex items-center gap-1 whitespace-nowrap">
-              <MapPin className="h-3 w-3 text-accent" />
-              {address.full}
-            </span>
+              <span>
+                Dépannage rapide · Île-de-France
+              </span>
+            </div>
+
+            <div className="h-3 w-px bg-white/10" />
+
+            <div className="flex items-center gap-2">
+              <Clock3 className="h-3.5 w-3.5 text-gold" />
+
+              <span>
+                Lundi–Samdi · 9h–19h
+              </span>
+            </div>
           </div>
 
-          <a
-            href={`mailto:${email}`}
-            className="flex items-center gap-1 hover:text-accent transition whitespace-nowrap"
-          >
-            <Mail className="h-3 w-3 text-accent" />
-            {email}
-          </a>
+          {/* RIGHT */}
+          <div className="flex items-center gap-5 text-[11px] text-white/60">
 
+            <a
+              href={`mailto:${email}`}
+              className="flex items-center gap-2 hover:text-gold transition-colors duration-300"
+            >
+              <Mail className="h-3.5 w-3.5 text-gold" />
+              <span>{email}</span>
+            </a>
+
+            <div className="h-3 w-px bg-white/10" />
+
+            <div className="flex items-center gap-2">
+              <MapPin className="h-3.5 w-3.5 text-gold" />
+              <span>{address.city}</span>
+            </div>
+
+          </div>
         </div>
       </div>
 
-      {/* ================= NAV ================= */}
+      {/* ===================================================== */}
+      {/* MAIN NAVBAR */}
+      {/* ===================================================== */}
       <div
-        className={`relative z-10 mx-auto max-w-7xl px-6 flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "py-2" : "py-5"
-        }`}
+        className={`
+          relative z-20
+          mx-auto max-w-7xl px-6
+          flex items-center justify-between
+          transition-all duration-300
+          ${
+            scrolled
+              ? "py-3"
+              : "py-5"
+          }
+        `}
       >
+        {/* ===================================================== */}
         {/* LOGO */}
-        <Link href="/" onClick={() => setOpen(false)}>
+        {/* ===================================================== */}
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          className="relative z-20"
+        >
           <div
-            className={`overflow-hidden flex items-center transition-all duration-300 ${
-              scrolled ? "h-14" : "h-20 md:h-24"
-            }`}
+            className={`
+              overflow-hidden flex items-center
+              transition-all duration-300
+              ${
+                scrolled
+                  ? "h-14"
+                  : "h-20 md:h-24"
+              }
+            `}
           >
             <Image
               src={logo}
@@ -106,77 +169,147 @@ export function Header() {
           </div>
         </Link>
 
+        {/* ===================================================== */}
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-7 text-[13px] font-medium tracking-wide">
-          {navLinks.map((l) => (
-            <Link key={l.href} href={l.href} className="nav-link">
-              {l.label}
+        {/* ===================================================== */}
+        <nav className="hidden md:flex items-center gap-8 text-[13px] font-medium tracking-wide">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="nav-link"
+            >
+              {link.label}
             </Link>
           ))}
         </nav>
 
+        {/* ===================================================== */}
         {/* RIGHT SIDE */}
+        {/* ===================================================== */}
         <div className="flex items-center gap-2">
 
           {/* CALL BUTTON */}
           <a
             href={`tel:${phone.raw}`}
             aria-label={`Appeler ${phone.display}`}
-            className="btn-gold rounded-sm group inline-flex items-center gap-2"
-            style={{ padding: "0.55rem 0.9rem", fontSize: "0.72rem" }}
+            className="
+              btn-gold
+              rounded
+              group
+              inline-flex
+              items-center
+              gap-2
+              shadow-lg
+              shadow-black/10
+            "
+            style={{
+              padding: "0.7rem 1rem",
+              fontSize: "0.72rem",
+            }}
           >
             <Phone className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-12" />
-            <span className="hidden sm:inline">{phone.display}</span>
-            <span className="sm:hidden">Appeler</span>
+
+            <span className="hidden sm:inline">
+              {phone.display}
+            </span>
+
+            <span className="sm:hidden">
+              Appeler
+            </span>
           </a>
 
-          {/* MOBILE MENU (FIXED ACCESSIBILITY) */}
+          {/* MOBILE MENU */}
           <button
             onClick={() => setOpen(!open)}
-            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-label={
+              open
+                ? "Fermer le menu"
+                : "Ouvrir le menu"
+            }
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-sm border border-white/15 text-white hover:text-accent hover:border-accent transition"
+            className="
+              md:hidden
+              inline-flex
+              items-center
+              justify-center
+              h-10 w-10
+              rounded
+              border border-white/10
+              text-white
+              hover:text-gold
+              hover:border-gold
+              transition-all duration-300
+            "
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
 
         </div>
       </div>
 
-      {/* ================= MOBILE MENU ================= */}
+      {/* ===================================================== */}
+      {/* MOBILE MENU */}
+      {/* ===================================================== */}
       {open && (
         <div
           id="mobile-menu"
-          className="md:hidden border-t border-white/10 bg-black/40 animate-menu-in"
+          className="
+            md:hidden
+            border-t border-white/5
+            bg-black/30
+            backdrop-blur-2xl
+            animate-in fade-in duration-300
+          "
         >
-          <div className="flex flex-col px-6 py-4 text-sm">
+          <div className="flex flex-col px-6 py-5">
 
-            {navLinks.map((l) => (
+            {navLinks.map((link) => (
               <Link
-                key={l.href}
-                href={l.href}
+                key={link.href}
+                href={link.href}
                 onClick={() => setOpen(false)}
-                className="py-3 border-b border-white/5 last:border-0 text-white/80 hover:text-accent hover:pl-2 transition-all duration-200"
+                className="
+                  py-4
+                  border-b border-white/5
+                  last:border-0
+                  text-white/80
+                  hover:text-gold
+                  transition-all duration-300
+                "
               >
-                {l.label}
+                {link.label}
               </Link>
             ))}
 
-            {/* CONTACT BLOCK */}
-            <div className="mt-4 pt-4 border-t border-white/10 text-xs text-white/70 space-y-2">
+            {/* MOBILE CONTACT */}
+            <div className="mt-5 pt-5 border-t border-white/10 space-y-3 text-sm text-white/65">
 
-              <a href={`tel:${phone.raw}`} className="block hover:text-accent">
-                📞 {phone.display}
+              <a
+                href={`tel:${phone.raw}`}
+                className="flex items-center gap-3 hover:text-gold transition-colors"
+              >
+                <Phone className="h-4 w-4 text-gold" />
+                {phone.display}
               </a>
 
-              <a href={`mailto:${email}`} className="block hover:text-accent">
-                ✉️ {email}
+              <a
+                href={`mailto:${email}`}
+                className="flex items-center gap-3 hover:text-gold transition-colors"
+              >
+                <Mail className="h-4 w-4 text-gold" />
+                {email}
               </a>
 
-              <span className="block">
-                📍 {address.full}
-              </span>
+              <div className="flex items-center gap-3">
+                <MapPin className="h-4 w-4 text-gold" />
+                {address.full}
+              </div>
 
             </div>
 
