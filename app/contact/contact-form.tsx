@@ -89,6 +89,8 @@ export default function ContactForm() {
   useEffect(() => {
   const raw = searchParams.get("service");
 
+  if (!raw) return;
+
   const matched = resolveService(raw);
 
   setForm((f) => ({
@@ -96,18 +98,14 @@ export default function ContactForm() {
     type: matched,
   }));
 
-  // 👇 ADD THIS PART (this is the missing UX behavior)
   setTimeout(() => {
-    const el = document.getElementById("contact-form");
-
-    if (el) {
-      el.scrollIntoView({
+    document.getElementById("contact-form")
+      ?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
-    }
-  }, 100);
-}, [searchParams]);
+  }, 50);
+}, [searchParams.toString()]);
 
   const update = (k: string, v: string | boolean) => {
     setForm((f) => ({ ...f, [k]: v }));
