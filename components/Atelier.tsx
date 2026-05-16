@@ -19,13 +19,13 @@ export function Atelier() {
 
           <div className="mt-5 md:mt-6 space-y-4 text-muted-foreground text-sm leading-relaxed max-w-xl">
             <p>
-              Multiservices de la Paix, c’est Élie Haddad et Farouk BENMENNI. Quatre métiers complémentaires réunis dans une seule adresse à Suresnes : serrurerie, cordonnerie, reproduction de clés et multiservices.
+              Multiservices de la Paix, c’est bien plus qu'une boutique : c'est une équipe de proximité au service des particuliers et des professionnels à Suresnes. Élie Haddad et Farouk BENMENNI y réunissent quatre savoir-faire complémentaires : serrurerie, cordonnerie, reproduction de clés et multiservices.
             </p>
             <p>
-              Nous accompagnons particuliers et professionnels avec réactivité, transparence et sérieux, aussi bien pour les urgences que pour les prestations du quotidien.
+              Nous faisons vivre notre boutique autour de valeurs simples et essentielles : réactivité, transparence et sérieux, aussi bien pour les urgences que pour les besoins du quotidien.
             </p>
              <p>
-              Notre engagement : un travail soigné, des tarifs clairs annoncés avant intervention et une véritable disponibilité lorsque vous en avez besoin.
+             Chaque intervention est réalisée avec soin, avec des tarifs transparents annoncés avant toute prestation et une vraie disponibilité au quotidien comme en urgence.
             </p>
           </div>
 
@@ -86,8 +86,7 @@ export function Atelier() {
             </div>
 
             <p className="text-[11px] sm:text-xs text-white/70 mt-2 leading-relaxed">
-              « Je tiens cette boutique avec la même exigence depuis le premier jour :
-              faire bien, tenir parole, rester disponible. »
+              « Je m'attache à faire vivre cette boutique avec des valeurs simples : sérieux, honnêteté, engagement et écoute. »
             </p>
 
           </div>

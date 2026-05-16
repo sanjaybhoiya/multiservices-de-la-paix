@@ -41,7 +41,7 @@ export default function Hero() {
 
             {/* H1 (PREMIUM + NOT OVERLOADED) */}
             <h1 className="display mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-navy-foreground leading-[1.05]">
-              Serrurier à{" "}
+              Multiservices Serrurier Cordonnier à{" "}
               <span className="text-gold">Suresnes</span> Intervention{" "}
               <span className="text-gold">24h/24</span>, 7j/7
             </h1>
@@ -53,7 +53,7 @@ export default function Hero() {
 
             {/* PARAGRAPH (SHORTENED BUT SEO SAFE) */}
             <p className="mt-6 max-w-xl text-navy-foreground/70 leading-relaxed">
-              Artisan installé à <strong>{address.street}, {address.city}</strong>, nous intervenons en urgence pour l’ouverture de porte,
+              Entreprise installée à <strong>{address.street}, {address.city}</strong>, nous intervenons en urgence pour l’ouverture de porte,
               le dépannage serrurerie, la reproduction de clés et la cordonnerie. Devis clair avant intervention.
             </p>
 
