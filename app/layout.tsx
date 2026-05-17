@@ -7,10 +7,11 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { Noto_Sans, Playfair_Display } from "next/font/google";
 import { cn } from "@/lib/utils";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import type { Metadata, Viewport } from "next";
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import ScrollToTop from "@/components/ScrollToTop";
+import Script from "next/script";
+import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // FONTS
@@ -43,17 +44,26 @@ const ADDRESS_CITY   = "Suresnes";
 const ADDRESS_ZIP    = "92150";
 const ADDRESS_FULL   = `${ADDRESS_STREET}, ${ADDRESS_ZIP} ${ADDRESS_CITY}`;
 const DIRECTOR       = "Elie Haddad";
+const GA_ID          = "G-S3HH85FE8T";
 
-// TODO: Replace with exact GPS coordinates from your Google Maps pin
-const GEO_LAT = 48.8717;
-const GEO_LNG = 2.2263;
+// GPS — geocoded from 37 Av. Jean Jaurès, 92150 Suresnes
+// ⚠️  Verify by opening: https://maps.google.com/?q=48.8698,2.2198
+// If the pin lands on your shopfront, you're good. If not, right-click your
+// exact pin on Google Maps → "What's here?" → copy the decimal coords below.
+const GEO_LAT = 48.8698;
+const GEO_LNG = 2.2198;
 
-// TODO: Add your Google Business Profile URL once the listing is live
+// ─────────────────────────────────────────────────────────────────────────────
+// SOCIAL MEDIA
+// ─────────────────────────────────────────────────────────────────────────────
+const FACEBOOK_URL  = "https://www.facebook.com/share/18knZafJkf/?mibextid=wwXIfr";
+const INSTAGRAM_URL = "https://www.instagram.com/multiservicesdelapaix/";
+// TODO: Update TikTok URL once you set a custom handle (@multiservicesdelapaix)
+//       Go to: TikTok app → Profile → Edit Profile → Username
+const TIKTOK_URL    = "https://www.tiktok.com/@user2596173724926";
+// TODO: Add once live:
 // const GOOGLE_BUSINESS_URL = "https://g.page/YOUR_PROFILE_ID";
-
-// TODO: Add social media URLs once accounts are created
-// const FACEBOOK_URL  = "https://www.facebook.com/multiservicesdelapaix";
-// const INSTAGRAM_URL = "https://www.instagram.com/multiservicesdelapaix";
+// const PAGES_JAUNES_URL    = "https://www.pagesjaunes.fr/pros/YOUR_ID";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SERVICE AREAS — Paris + Île-de-France coverage
@@ -104,7 +114,6 @@ export const metadata: Metadata = {
     languages: { "fr-FR": "/" },
   },
 
-  // TODO: Create og-image.jpg (1200×630px) with shopfront photo → /public/og-image.jpg
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -145,10 +154,10 @@ export const metadata: Metadata = {
     },
   },
 
-  // TODO: Replace token once you verify in Google Search Console
+  // TODO: Paste your token from Google Search Console here
+  // Get it at: https://search.google.com/search-console → Add property → HTML tag method
   verification: {
     google: "REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_TOKEN",
-    // yandex: "REPLACE_WITH_YANDEX_TOKEN",
   },
 
   applicationName: SITE_NAME,
@@ -168,7 +177,7 @@ export const metadata: Metadata = {
     "entity:priceRange":  "€€",
     "entity:language":    "fr",
     // Allow indexing by major AI crawlers
-    // TODO: Also add these explicitly to your public robots.txt file
+    // Also add these to your public /public/robots.txt file
     "robots-gptbot":        "index, follow",
     "robots-perplexitybot": "index, follow",
     "robots-claudebot":     "index, follow",
@@ -209,7 +218,7 @@ const jsonLd = {
         "Serrurier Paris Ouest",
       ],
       description:
-        "Serrurerie, cordonnerie, vitrerie et multiservices à Suresnes, Paris et Hauts-de-Seine. Ouverture de porte, remplacement serrure, reproduction de clés, dépannage urgence 7j/7.",
+        "Serrurerie, cordonnerie, vitrerie et multiservices à Suresnes, Paris et Hauts-de-Seine. Ouverture de porte, remplacement serrure, reproduction de clés, dépannage urgence 24h/24 7j/7.",
       url: SITE_URL,
       telephone: PHONE_INTL,
       email: EMAIL,
@@ -223,11 +232,10 @@ const jsonLd = {
       },
       geo: {
         "@type": "GeoCoordinates",
-        // TODO: Replace with exact pin coordinates from Google Maps
         latitude: GEO_LAT,
         longitude: GEO_LNG,
       },
-      // TODO: Confirm exact opening hours and update below
+      // Physical shop opening hours (Mon–Sat only, no Sunday in-store)
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -241,8 +249,42 @@ const jsonLd = {
           opens: "09:00",
           closes: "17:00",
         },
-        // TODO: Uncomment if Sunday service is offered
-        // { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "09:00", closes: "13:00" },
+        // No Sunday in-store — emergency phone line only (see contactPoint below)
+      ],
+      // 24/7 emergency line — separate from physical shop hours
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: PHONE_INTL,
+          contactType: "customer service",
+          areaServed: "FR",
+          availableLanguage: "French",
+          hoursAvailable: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday","Tuesday","Wednesday","Thursday",
+              "Friday","Saturday","Sunday",
+            ],
+            opens: "00:00",
+            closes: "23:59",
+          },
+        },
+        {
+          "@type": "ContactPoint",
+          telephone: PHONE_INTL,
+          contactType: "emergency",
+          areaServed: "FR",
+          availableLanguage: "French",
+          hoursAvailable: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday","Tuesday","Wednesday","Thursday",
+              "Friday","Saturday","Sunday",
+            ],
+            opens: "00:00",
+            closes: "23:59",
+          },
+        },
       ],
       hasMap: `https://maps.google.com/?q=${encodeURIComponent(ADDRESS_FULL)}`,
       priceRange: "€€",
@@ -264,32 +306,37 @@ const jsonLd = {
         "Gravure plaques", "Plaques immatriculation",
         "Remplacement piles montres", "Tampons professionnels",
       ],
-      // TODO: Add once real reviews are collected (Google, PagesJaunes, etc.)
-      // aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "47", bestRating: "5" },
+      // TODO: Uncomment and fill in once you have ≥5 real verified reviews
+      // aggregateRating: {
+      //   "@type": "AggregateRating",
+      //   ratingValue: "4.9",
+      //   reviewCount: "47",
+      //   bestRating: "5",
+      //   worstRating: "1",
+      // },
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/logo.png`, // TODO: Add logo.png to /public/
+        // ⚠️  Your logo is at /assets/logo-multiservices.svg inside the project.
+        // Next.js only serves files from /public/ — make sure /assets/ is inside
+        // /public/ (i.e. /public/assets/logo-multiservices.svg), otherwise move it.
+        url: `${SITE_URL}/assets/logo-multiservices.svg`,
         width: 200,
         height: 60,
       },
       image: `${SITE_URL}/og-image.jpg`,
       sameAs: [
-        // TODO: Add these once live:
-        // GOOGLE_BUSINESS_URL,
-        // FACEBOOK_URL,
-        // INSTAGRAM_URL,
-        // "https://www.pagesjaunes.fr/...",
+        FACEBOOK_URL,
+        INSTAGRAM_URL,
+        TIKTOK_URL,
+        // TODO: Uncomment once live:
+        // GOOGLE_BUSINESS_URL,   ← highest priority — do this first
+        // PAGES_JAUNES_URL,      ← second priority
       ],
       founder: { "@type": "Person", name: DIRECTOR },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: PHONE_INTL,
-        contactType: "customer service",
-        areaServed: "FR",
-        availableLanguage: "French",
-        // TODO: Uncomment if WhatsApp / emergency line is genuinely 24/7
-        // hoursAvailable: "Mo-Su 00:00-23:59",
-      },
+      // TODO: Uncomment and fill in once SIRET is officially attributed
+      // legalName: SITE_NAME,
+      // taxID: "FR_VAT_NUMBER",
+      // identifier: { "@type": "PropertyValue", name: "SIRET", value: "SIRET_NUMBER" },
     },
 
     // 2. WebSite — enables Sitelinks Search Box in Google
@@ -311,7 +358,6 @@ const jsonLd = {
     },
 
     // 3. FAQPage — heavily weighted by AI answer engines (Perplexity, ChatGPT)
-    // TODO: Aim for 8–12 FAQs covering your most searched queries
     {
       "@type": "FAQPage",
       "@id": `${SITE_URL}/#faq`,
@@ -337,7 +383,7 @@ const jsonLd = {
           name: "Proposez-vous un service de serrurerie d'urgence à Paris et en Île-de-France ?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Oui, Multiservices de la Paix intervient en urgence à Suresnes, dans les Hauts-de-Seine (92), à Paris et dans toute l'Île-de-France. Contactez-nous au 07 49 49 03 03 pour une intervention rapide.",
+            text: "Oui, Multiservices de la Paix intervient en urgence 24h/24 et 7j/7 à Suresnes, dans les Hauts-de-Seine (92), à Paris et dans toute l'Île-de-France. Contactez-nous au 07 49 49 03 03.",
           },
         },
         {
@@ -356,11 +402,35 @@ const jsonLd = {
             text: "Oui, notre atelier de cordonnerie à Suresnes propose la réparation de chaussures (semelles, talons, fermetures éclair), l'entretien du cuir et la réparation de maroquinerie. À partir de 12 € TTC.",
           },
         },
-        // TODO: Add more FAQs — aim for 8-12 total. Suggested questions:
-        // "Faites-vous la vitrerie en urgence ?"
-        // "Quels modes de paiement acceptez-vous ?"
-        // "Intervenez-vous le week-end et les jours fériés ?"
+        {
+          "@type": "Question",
+          name: "Faites-vous la vitrerie en urgence à Suresnes ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Oui, nous intervenons en urgence pour la mise en sécurité et le remplacement de vitres cassées à Suresnes et dans les Hauts-de-Seine. Ligne disponible 24h/24 au 07 49 49 03 03.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Quels modes de paiement acceptez-vous ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Nous acceptons le paiement en espèces, par carte bancaire et par virement bancaire.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Intervenez-vous le week-end et les jours fériés ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Oui, notre ligne d'urgence est disponible 7j/7 y compris les week-ends et jours fériés. Appelez le 07 49 49 03 03 à toute heure pour une intervention d'urgence.",
+          },
+        },
+        // TODO: Add more FAQs when ready — suggested:
         // "Combien coûte un remplacement de cylindre ?"
+        // "Intervenez-vous pour les serrures de voiture ?"
+        // "Faites-vous des devis gratuits ?"
+        // "Intervenez-vous dans tout Paris et l'Île-de-France ?"
       ],
     },
 
@@ -406,7 +476,7 @@ const jsonLd = {
       provider: { "@id": `${SITE_URL}/#business` },
       areaServed: { "@type": "AdministrativeArea", name: "Hauts-de-Seine" },
       description:
-        "Mise en sécurité et remplacement de vitres cassées en urgence à Suresnes et Hauts-de-Seine. Intervention rapide.",
+        "Mise en sécurité et remplacement de vitres cassées en urgence à Suresnes et Hauts-de-Seine. Intervention rapide 24h/24.",
       offers: {
         "@type": "Offer",
         priceRange: "120€ – 250€",
@@ -429,7 +499,7 @@ const jsonLd = {
         { "@type": "ListItem", position: 5, name: "Multiservices", item: `${SITE_URL}/multiservices` },
         { "@type": "ListItem", position: 6, name: "Tarifs",        item: `${SITE_URL}/tarifs` },
         { "@type": "ListItem", position: 7, name: "Contact",       item: `${SITE_URL}/contact` },
-        // TODO: Add /blog once you start publishing articles (very powerful for AIO)
+        // TODO: Add /blog once you start publishing articles (big AIO boost)
       ],
     },
   ],
@@ -453,19 +523,18 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
+        {/* Preconnect to Google Analytics — reduces analytics latency */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+
         {/* DNS prefetch for Google Maps embed (used in contact page) */}
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
 
-        {/*
-          TODO: Favicons — generate all sizes at https://realfavicongenerator.net
-          then drop the output files into /public/
-        */}
+        {/* Favicons — all three confirmed present in /public/ */}
         <link rel="icon"             href="/favicon.ico"          sizes="any" />
         <link rel="icon"             href="/icon.svg"             type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-       
-        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="manifest"         href="/manifest.webmanifest" />
 
         {/* Canonical safety net (also set via metadata.alternates above) */}
         <link rel="canonical" href={SITE_URL} />
@@ -475,24 +544,29 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-
-        {/*
-          TODO: Google Analytics — uncomment once GA account is set up
-          Replace GA_MEASUREMENT_ID with your real ID (format: G-XXXXXXXXXX)
-
-          <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" />
-          <script dangerouslySetInnerHTML={{ __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'GA_MEASUREMENT_ID');
-          `}} />
-        */}
-
-      
       </head>
 
       <body className="min-h-screen flex flex-col">
+
+        {/* ── Google Analytics 4 ──────────────────────────────────────────────
+            strategy="afterInteractive" loads GA only after the page is
+            interactive — it NEVER blocks rendering or hurts LCP/CLS/INP.
+            ⚠️  Do NOT use a raw <script> tag here: it fires during SSR,
+                causes hydration mismatches and can double-execute on navigation.
+                Always use Next.js <Script> for third-party scripts.
+        ─────────────────────────────────────────────────────────────────────── */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+          `}
+        </Script>
 
         <ScrollToTop />
 
@@ -509,7 +583,6 @@ export default function RootLayout({
 
           {/* id="main-content" is referenced by the skip link above */}
           <main id="main-content" className="flex-1">
-
             {children}
           </main>
 
@@ -518,8 +591,8 @@ export default function RootLayout({
 
         <CookieBanner />
         <WhatsAppButton />
-      <SpeedInsights/>
-       <Analytics/>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
